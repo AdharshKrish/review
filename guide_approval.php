@@ -23,7 +23,7 @@
         </th>
         <?php
             $_SESSION['email']="lpandian72@pec.edu";
-            $conn=mysqli_connect("localhost","root","","review");
+            $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['email']."' and guide_approval=0");
             while($row=mysqli_fetch_assoc($result))
             {
@@ -51,7 +51,7 @@
         </th>
         <?php
             $_SESSION['email']="lpandian72@pec.edu";
-            $conn=mysqli_connect("localhost","root","","review");
+            $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['email']."' and guide_approval=1");
             while($row=mysqli_fetch_assoc($result))
             {

@@ -31,7 +31,7 @@
         <select class="form__field" style="width: 99.3%;" name="guide">
             <option value="Select">Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","","review");
+                $conn=mysqli_connect("localhost","root","root","review");
                 $result=mysqli_query($conn,"select * from facultylogin");
                 while($row=mysqli_fetch_assoc($result))
                 {
