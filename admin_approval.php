@@ -10,7 +10,8 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-<a href="logout.php">SignOut</a>
+<h4 align="right"><a href="logout.php" >SignOut</a></h4>
+
     
 <h1>Yet to Approve</h1>
 
@@ -26,8 +27,11 @@
         </th>
         <?php
         session_start();
-        if(!isset($_SESSION['email'])){
+        if(!isset($_SESSION['email'] ) ){
             header('location:index1.html');
+        }
+        if($_SESSION['role']!='admin_approval.php' ){
+            header('location:'.$_SESSION['role']);
         }
             $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from consent where guide_approval=1");

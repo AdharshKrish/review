@@ -1,7 +1,7 @@
 <?php
  $conn=mysqli_connect("localhost","root","root","review");
  $result=mysqli_query($conn,"insert into consent values(null,'".$_POST['name']."','".$_POST['regno']."','".$_POST['email']."','".$_POST['guide']."',0)");
- 
+ header('location:login.php');
 //  $mysqli = new mysqli("localhost","root","root","review");
 
 // // Check connection

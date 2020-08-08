@@ -79,7 +79,7 @@
   transition: 0.3s;
 }
 
-.consent-form {
+.consent-form{
 
   width: 50%;
   border: 3px solid #808;
@@ -105,3 +105,8 @@
   color: white;
   padding-left: 30px;
 }
+.notify{
+  width:100%;
+  text-align: left;
+}
+

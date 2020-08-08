@@ -8,19 +8,25 @@
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<a href="logout.php">SignOut</a>
+<h4 align="right"><a href="logout.php" >SignOut</a></h4>
 
-<h1>Notifications</h1>
+<div class="consent-form">
+<h1 align="center" style="color:#808" >Notifications</h1>
 
     <?php
     session_start();
-    if(!isset($_SESSION['email'])){
+    if(!isset($_SESSION['email'] ) ){
         header('location:index1.html');
     }
+    if($_SESSION['role']!='guide_approval.php' ){
+        header('location:'.$_SESSION['role']);
+    }
      $conn=mysqli_connect("localhost","root","root","review");
-     $_SESSION['email']="lpandian72@pec.edu";
+     
      $result=mysqli_query($conn,"select * from facultylogin where email='".$_SESSION['email']."'");
      while($row=mysqli_fetch_assoc($result))
      {
@@ -29,6 +35,7 @@
      $result=mysqli_query($conn,"select * from notify where staff='".$_SESSION['name']."'");
      while($row=mysqli_fetch_assoc($result))
      {
+        echo "<div style=' display:flex; padding:10px 0;'>";
          if($row['category']==0){
              echo "<div style=color:red>";
              echo "Admin has rejected ".$row['student']." consent. ";
@@ -40,8 +47,13 @@
              echo "Admin has approved ".$row['student']." consent. ";
              echo "</div>";
          }
+         echo '<form action="delete.php" method="post" >
+                        <input type="hidden" name="sno" value="'.$row['sno'].'"> 
+                        <button  class="btn" type="submit" class="delete" value="Delete" ><i class="fa fa-trash"></i></button>
+                        </form>';
      }
     ?>
+    </div>
 <h1>Yet to Approve</h1>
 
     <table>
