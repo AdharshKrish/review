@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2020 at 04:51 PM
+-- Generation Time: Aug 08, 2020 at 08:45 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -25,6 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `approved`
+--
+
+CREATE TABLE `approved` (
+  `regno` varchar(10) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `guide` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `consent`
 --
 
@@ -36,13 +49,6 @@ CREATE TABLE `consent` (
   `guide` varchar(30) NOT NULL,
   `guide_approval` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `consent`
---
-
-INSERT INTO `consent` (`sno`, `name`, `regno`, `email`, `guide`, `guide_approval`) VALUES
-(4, 'Arul Selvi', '17cs103', 'adharsh28600@gmail.com', 'lpandian72@pec.edu', 1);
 
 -- --------------------------------------------------------
 
@@ -82,12 +88,54 @@ INSERT INTO `facultylogin` (`name`, `email`, `password`) VALUES
 ('Dr.Sarala.R', 'sarala@pec.edu', 'password@123'),
 ('Dr.Sathyamurthy.K', 'sathiyamurthyk@pec.edu', 'password@123'),
 ('Dr.Selvaradjou.Ka', 'selvaraj@pec.edu', 'password@123'),
+('Shafreena', 'shafreena2000@pec.edu', 'false'),
 ('Dr.Sheeba.J.I', 'sheeba@pec.edu', 'password@123'),
 ('Dr.Sivakumar.N', 'sivakumar11@pec.edu', 'password@123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notify`
+--
+
+CREATE TABLE `notify` (
+  `sno` int(11) NOT NULL,
+  `student` varchar(30) DEFAULT NULL,
+  `staff` varchar(30) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `sno` int(11) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `role` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`sno`, `email`, `role`) VALUES
+(1, 'shafreena2000@pec.edu', 'guide'),
+(2, 'shafreena2000@gmail.com', 'student'),
+(3, 'adharshkrish@outlook.com', 'admin');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `approved`
+--
+ALTER TABLE `approved`
+  ADD PRIMARY KEY (`regno`);
 
 --
 -- Indexes for table `consent`
@@ -102,6 +150,18 @@ ALTER TABLE `facultylogin`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indexes for table `notify`
+--
+ALTER TABLE `notify`
+  ADD PRIMARY KEY (`sno`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`sno`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -109,7 +169,19 @@ ALTER TABLE `facultylogin`
 -- AUTO_INCREMENT for table `consent`
 --
 ALTER TABLE `consent`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `notify`
+--
+ALTER TABLE `notify`
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
