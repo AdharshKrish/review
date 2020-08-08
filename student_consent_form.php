@@ -10,6 +10,37 @@
     <div class="header">
         <img src="img/logo.png"></img><h1>DEPARTMENT OF <br> COMPUTER SCIENCE AND ENGINEERING</h1>
     </div>
+    <a href="logout.php">SignOut</a>
+ <div>
+<h1 align="center" style="color:#808">Notifications</h1>
+
+ <?php
+                session_start();
+                if(!isset($_SESSION['email'])){
+                    header('location:index1.html');
+                }
+                $conn=mysqli_connect("localhost","root","root","review");
+                // echo $_SESSION['email'];//="adharshkrish@outlook.com";
+                $result=mysqli_query($conn,"select * from notify where student='".$_SESSION['email']."'");
+                while($row=mysqli_fetch_assoc($result))
+                {
+                    if($row['category']==0){
+                        echo "<div style=color:red>";
+                        echo "Your staff has rejected your consent. ";
+                        echo "Reason: ".$row['message'];
+                        echo ". Please choose an other staff";
+                        echo "</div>";
+                    }
+                    else if($row['category']==1){
+                        echo "<div style=color:green>";
+                        echo "Your staff has approved your consent. ";
+                        echo "</div>";
+                    }
+                }
+                $result=mysqli_query($conn,"select * from approved where email='".$_SESSION['email']."'");
+                if(!$row=mysqli_fetch_assoc($result)){
+?>
+ </div>
 <form action="consent_submit.php" method="post" class="consent-form">
 <h1 align="center" style="color:#808">STUDENT CONSENT FORM</h1>
         <div class="form__group field">
@@ -36,7 +67,7 @@
                 while($row=mysqli_fetch_assoc($result))
                 {
                     ?>
-                    <option value="<?php echo $row['email'];?>"><?php echo $row['name'];?></option>
+                    <option value="<?php echo $row['name'];?>"><?php echo $row['name'];?></option>
                     <?php
                 }
             ?>
@@ -46,5 +77,11 @@
         <button id="signup" class="submit">Submit</button>
             </div>
     </form>
+    <?php
+        }
+        else{
+            echo "Guide: ".$row['guide'];
+        }
+    ?>
 </body>
 </html>

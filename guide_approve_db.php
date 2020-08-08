@@ -6,5 +6,6 @@ if(!$_POST['reject'])
 }
 else{
     $conn=mysqli_connect("localhost","root","root","review");
+    $result=mysqli_query($conn,"insert into notify values(null,'".$_POST['email']."',null,'".$_POST['message']."',0)");   
     $result=mysqli_query($conn,"delete from consent where sno=".$_POST['sno']); 
 }

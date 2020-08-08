@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Approval</title>
+    <title>Admin Approval</title>
     <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
@@ -11,37 +11,7 @@
 </head>
 <body>
 <a href="logout.php">SignOut</a>
-
-<h1>Notifications</h1>
-
-    <?php
-    session_start();
-    if(!isset($_SESSION['email'])){
-        header('location:index1.html');
-    }
-     $conn=mysqli_connect("localhost","root","root","review");
-     $_SESSION['email']="lpandian72@pec.edu";
-     $result=mysqli_query($conn,"select * from facultylogin where email='".$_SESSION['email']."'");
-     while($row=mysqli_fetch_assoc($result))
-     {
-         $_SESSION['name']=$row['name'];
-     }
-     $result=mysqli_query($conn,"select * from notify where staff='".$_SESSION['name']."'");
-     while($row=mysqli_fetch_assoc($result))
-     {
-         if($row['category']==0){
-             echo "<div style=color:red>";
-             echo "Admin has rejected ".$row['student']." consent. ";
-             echo "Reason: ".$row['message'];
-             echo "</div>";
-         }
-         else if($row['category']==1){
-             echo "<div style=color:green>";
-             echo "Admin has approved ".$row['student']." consent. ";
-             echo "</div>";
-         }
-     }
-    ?>
+    
 <h1>Yet to Approve</h1>
 
     <table>
@@ -50,15 +20,17 @@
             <td>Student name</td>
             <td>Reg no.</td>
             <td>Email</td>
+            <td>Guide</td>
             </tr>
             
         </th>
         <?php
-       
-        
-            // $_SESSION['email']="lpandian72@pec.edu";
-            // $conn=mysqli_connect("localhost","root","root","review");
-            $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=0");
+        session_start();
+        if(!isset($_SESSION['email'])){
+            header('location:index1.html');
+        }
+            $conn=mysqli_connect("localhost","root","root","review");
+            $result=mysqli_query($conn,"select * from consent where guide_approval=1");
             while($row=mysqli_fetch_assoc($result))
             {
                 ?>
@@ -66,8 +38,9 @@
                 <td><?php echo $row['name']?></td>
                 <td><?php echo $row['regno']?></td>
                 <td><?php echo $row['email']?></td>
-                <td><button  style=color:green onclick="approve('<?php echo $row['sno']?>')">Approve</button></td>
-                <td><button  style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>')">Reject</button></td>
+                <td><?php echo $row['guide']?></td>
+                <td><button style=color:green onclick='<?php echo 'approve("'.$row['sno'].'","'.$row['regno'].'","'.$row['name'].'","'.$row['email'].'","'.$row['guide'].'")'?>'>Approve</button></td>
+                <td><button style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>','<?php echo $row['guide']?>')">Reject</button></td>
                 </tr>
                 <?php
             }
@@ -80,12 +53,14 @@
             <td>Student name</td>
             <td>Reg no.</td>
             <td>Email</td>
+            <td>Guide</td>
             </tr>
             
         </th>
         <?php
-            // $conn=mysqli_connect("localhost","root","root","review");
-            $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=1");
+        
+            $conn=mysqli_connect("localhost","root","root","review");
+            $result=mysqli_query($conn,"select * from approved");
             while($row=mysqli_fetch_assoc($result))
             {
                 ?>
@@ -93,20 +68,25 @@
                 <td><?php echo $row['name']?></td>
                 <td><?php echo $row['regno']?></td>
                 <td><?php echo $row['email']?></td>
+                <td><?php echo $row['guide']?></td>
                 </tr>
                 <?php
             }
             ?>
     </table>
     <script>
-        function approve(sno){
+        function approve(sno,reg,name,email,guide){
             if (confirm('Are you sure you want to approve?')) {
                 // Save it!
                 $.ajax({
                     type: "POST",
-                    url: "guide_approve_db.php",
+                    url: "admin_approve_db.php",
                     data: {
-                        sno:sno
+                        sno:sno,
+                        reg:reg,
+                        name:name,
+                        email:email,
+                        guide:guide
                     },
                     success: function (blabla) {
                         console.log(blabla)
@@ -118,17 +98,18 @@
             // Do nothing!
             }
         }
-        function reject(sno,email){
+        function reject(sno,student,staff){
             let message;
             if (message=prompt('Please mention the reason for rejecting')) {
                 // Save it!
                 $.ajax({
                     type: "POST",
-                    url: "guide_approve_db.php",
+                    url: "admin_approve_db.php",
                     data: {
                         reject:true,
                         sno:sno,
-                        email:email,
+                        student:student,
+                        staff:staff,
                         message:message
                     },
                     success: function (blabla) {

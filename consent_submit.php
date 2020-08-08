@@ -2,7 +2,7 @@
  $conn=mysqli_connect("localhost","root","root","review");
  $result=mysqli_query($conn,"insert into consent values(null,'".$_POST['name']."','".$_POST['regno']."','".$_POST['email']."','".$_POST['guide']."',0)");
  
-//  $mysqli = new mysqli("localhost","root","","review");
+//  $mysqli = new mysqli("localhost","root","root","review");
 
 // // Check connection
 // if ($mysqli -> connect_errno) {
@@ -19,7 +19,7 @@
 
 // $mysqli -> close();
 
-// $conn = new mysqli("localhost","root","","review");
+// $conn = new mysqli("localhost","root","root","review");
 // // Check connection
 // if ($conn->connect_error) {
 //   die("Connection failed: " . $conn->connect_error);

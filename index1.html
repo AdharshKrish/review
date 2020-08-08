@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-client_id"
         content="709166335785-seqiorm4c9rb17oemve81naa2t6eev7v.apps.googleusercontent.com">
-    <title>Document</title>
+    <title>Login</title>
 
 </head>
 
@@ -16,8 +16,12 @@
     <div id="ID"></div>
     <div id="name"></div>
     <div id="email"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
+    <!-- <a href="#" onclick="signOut();">Sign out</a> -->
     <div id="status"></div>
+    <form action="login.php" method="post" style="display: none;">
+        <!-- <input type="text" name="email" id="email"> -->
+        <input type="submit" id="login" name="login" value="login">
+    </form>
 </body>
 <script>
     var a;
@@ -33,6 +37,8 @@
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        document.getElementById("login").value = profile.getEmail();
+        document.getElementById("login").click();
     }
 
     function signOut() {
