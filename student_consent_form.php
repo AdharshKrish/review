@@ -92,7 +92,7 @@
         </select>
         </div>
         <div class="form__group field">
-        <button id="signup" class="submit">Submit</button>
+        <button id="signup" class="submit" name="datetime">Submit</button>
             </div>
     </form>
     <?php
@@ -103,9 +103,5 @@
     ?>
     </center>
 </body>
-<script>
-    function trash(email,message){
-          
-    }
-</script>
+
 </html>

@@ -47,7 +47,7 @@
              echo "Admin has approved ".$row['student']." consent. ";
              echo "</div>";
          }
-         echo '<form action="delete.php" method="post" >
+         echo '<form action="update.php" method="post" >
                         <input type="hidden" name="sno" value="'.$row['sno'].'"> 
                         <button  class="btn" type="submit" class="delete" value="Delete" ><i class="fa fa-trash"></i></button>
                         </form>';
@@ -78,8 +78,8 @@
                 <td><?php echo $row['name']?></td>
                 <td><?php echo $row['regno']?></td>
                 <td><?php echo $row['email']?></td>
-                <td><button  style=color:green onclick="approve('<?php echo $row['sno']?>')">Approve</button></td>
-                <td><button  style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>')">Reject</button></td>
+                <td><button name="guide_accept" style=color:green onclick="approve('<?php echo $row['sno']?>')">Approve</button></td>
+                <td><button name="guide_reject" style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>')">Reject</button></td>
                 </tr>
                 <?php
             }
