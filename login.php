@@ -10,7 +10,8 @@ if(isset($_SESSION['role'])){
 }
 
 $_SESSION['email'] = $email;
-$conn=mysqli_connect("localhost","root","root","review");
+$_SESSION['pic'] = $_POST['pic'];
+$conn=mysqli_connect("localhost","root","","review");
 $result=mysqli_query($conn,"select * from roles where email='$email'");   
 while($row=mysqli_fetch_assoc($result))
 {
@@ -19,8 +20,8 @@ while($row=mysqli_fetch_assoc($result))
         header('location:guide_approval.php');
     }
     else if($row['role']=='student'){
-        $_SESSION['role'] = 'student_consent_form.php';
-        header('location:student_consent_form.php');
+        $_SESSION['role'] = 'student.php';
+        header('location:student.php');
     }
     else if($row['role']=='admin'){
         $_SESSION['role'] = 'admin_approval.php';
