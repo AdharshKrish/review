@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2020 at 08:45 AM
--- Server version: 10.4.11-MariaDB
+-- Generation Time: Aug 09, 2020 at 08:44 AM
+-- Server version: 10.5.0-MariaDB
 -- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -47,8 +47,17 @@ CREATE TABLE `consent` (
   `regno` varchar(10) NOT NULL,
   `email` varchar(30) NOT NULL,
   `guide` varchar(30) NOT NULL,
-  `guide_approval` tinyint(1) NOT NULL DEFAULT 0
+  `guide_approval` tinyint(1) NOT NULL DEFAULT 0,
+  `time` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `consent`
+--
+
+INSERT INTO `consent` (`sno`, `name`, `regno`, `email`, `guide`, `guide_approval`, `time`) VALUES
+(33, 'gayadhshaf', '17cs13248', 'shafreena2000@gmail.com', 'Shafreena', 0, '2020-08-09 11:58:19'),
+(34, 'adhshafgaya', '17cs24813', 'shafreena2000@gmail.com', 'Shafreena', 0, '2020-08-09 11:58:56');
 
 -- --------------------------------------------------------
 
@@ -125,7 +134,25 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`sno`, `email`, `role`) VALUES
 (1, 'shafreena2000@pec.edu', 'guide'),
 (2, 'shafreena2000@gmail.com', 'student'),
-(3, 'adharshkrish@outlook.com', 'admin');
+(3, 'agayathrics2017@gmail.com', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timeanddate`
+--
+
+CREATE TABLE `timeanddate` (
+  `regno` varchar(10) NOT NULL,
+  `consent_time` varchar(30) DEFAULT NULL,
+  `guide` varchar(30) NOT NULL,
+  `guide_approve` varchar(30) DEFAULT NULL,
+  `guide_reject` varchar(30) DEFAULT NULL,
+  `guide_msg` varchar(100) NOT NULL,
+  `admin_approve` varchar(30) DEFAULT NULL,
+  `admin_reject` varchar(30) DEFAULT NULL,
+  `admin_msg` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -169,13 +196,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `consent`
 --
 ALTER TABLE `consent`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `notify`
 --
 ALTER TABLE `notify`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `roles`
