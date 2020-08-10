@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id"
+        content="709166335785-seqiorm4c9rb17oemve81naa2t6eev7v.apps.googleusercontent.com">
+    <title>Login</title>
+
+    <style>
+        .large-header {
+   position: relative;
+   width: 100%;
+   background: #111;
+   overflow: hidden;
+   background-size: cover;
+   background-position: center center;
+   z-index: 1;
+}
+
+.demo .large-header {
+   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+}
+
+.main-title {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 50%;
+   left: 50%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+}
+
+.demo .main-title {
+   text-transform: uppercase;
+   font-size: 4.2em;
+   letter-spacing: 0.1em;
+}
+
+.main-title .thin {
+   font-weight: 200;
+}
+
+@media only screen and (max-width: 768px) {
+   .demo .main-title {
+      font-size: 3em;
+   }
+}
+    </style>
+</head>
+
+<body>
+    <div class="main-title">
+    <div class="container demo">
+        <div class="content">
+           <div id="large-header" class="large-header">
+              <canvas id="demo-canvas"></canvas>
+              <div class="header">
+                <img src="img/logo.png"></img><h1>DEPARTMENT OF <br> COMPUTER SCIENCE AND ENGINEERING</h1>
+            </div>
+           <center> <div class="g-signin2" data-onsuccess="onSignIn" style="margin:100px 0 30px 0"></div>
+           <div>(Sign in using your college email-id)</div></center>
+            <div id="ID"></div>
+            <div id="name"></div>
+            <div id="email"></div>
+            <!-- <a href="#" onclick="signOut();">Sign out</a> -->
+            <div id="status"></div>
+            <form action="login.php" method="post" style="display: none;">
+                <input type="text" name="pic" id="pic">
+                <input type="submit" id="login" name="login" value="login">
+            </form>
+              <h1 class="main-title"><span class="thin"></span> </h1>
+           </div>
+        </div>
+     </div>
+    </div>
+</body>
+<script>var a;
+
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        document.getElementById("ID").innerHTML = "ID: " + profile.getId();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead
+        document.getElementById("name").innerHTML = "Name: " + profile.getName();
+        a = profile.getName();
+        document.getElementById("email").innerHTML = "Email: " + profile.getEmail();
+        document.getElementById("status").innerHTML = "";
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        document.getElementById("login").value = profile.getEmail();
+        document.getElementById("pic").value = profile.getImageUrl();
+        document.getElementById("login").click();
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+            document.getElementById("status").innerHTML = a + " signed out.";
+            document.getElementById("ID").innerHTML = "";
+            document.getElementById("name").innerHTML = "";
+            document.getElementById("email").innerHTML = "";
+
+
+        });
+    }</script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/TweenLite.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/EasePack.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo.js"></script>
+</html>

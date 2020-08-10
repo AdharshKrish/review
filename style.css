@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 .form__group {
   position: relative;
   padding: 15px 0 0;
@@ -45,7 +46,7 @@
   padding-bottom: 6px;
   font-weight: 500;
   border-width: 3px;
-  border-color: #808;
+  border-color: #1976D2;
   border-image-slice: 1;
 }
 
@@ -55,7 +56,7 @@
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: #808;
+  color: #1976D2;
   font-weight: 700;
 }
 
@@ -71,9 +72,9 @@
   margin: 20px auto;
   width: 80%;
   height: 40px;
-  border: 2px solid #800080;
+  border: 2px solid #1976D2;
   border-radius: 5px;
-  background-color: #800080;
+  background-color: #1976D2;
   color: white;
   font-weight: 700;
   transition: 0.3s;
@@ -82,7 +83,7 @@
 .consent-form{
 
   width: 50%;
-  border: 3px solid #808;
+  border: 3px solid #1976D2;
   border-radius: 10px;
   padding: 30px 20px;
 }
@@ -93,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #808;
+  background-color: #1976D2; 
 
 }
 
@@ -104,9 +105,16 @@
 .header h1 {
   color: white;
   padding-left: 30px;
+  font-family: 'EB Garamond', serif;
+
 }
 .notify{
   width:100%;
   text-align: left;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }
 

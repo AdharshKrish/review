@@ -25,7 +25,7 @@
     if($_SESSION['role']!='guide_approval.php' ){
         header('location:'.$_SESSION['role']);
     }
-     $conn=mysqli_connect("localhost","root","","review");
+     $conn=mysqli_connect("localhost","root","root","review");
      
      $result=mysqli_query($conn,"select * from facultylogin where email='".$_SESSION['email']."'");
      while($row=mysqli_fetch_assoc($result))
@@ -69,7 +69,7 @@
        
         
             // $_SESSION['email']="lpandian72@pec.edu";
-            // $conn=mysqli_connect("localhost","root","","review");
+            // $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=0");
             while($row=mysqli_fetch_assoc($result))
             {
@@ -78,8 +78,8 @@
                 <td><?php echo $row['name']?></td>
                 <td><?php echo $row['regno']?></td>
                 <td><?php echo $row['email']?></td>
-                <td><button name="guide_accept" style=color:green onclick="approve('<?php echo $row['sno']?>')">Approve</button></td>
-                <td><button name="guide_reject" style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>')">Reject</button></td>
+                <td><button name="guide_accept" style=color:green onclick="approve('<?php echo $row['sno']?>','<?php echo $row['regno']?>','<?php echo $row['guide']?>')">Approve</button></td>
+                <td><button name="guide_reject" style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>','<?php echo $row['regno']?>','<?php echo $row['guide']?>')">Reject</button></td>
                 </tr>
                 <?php
             }
@@ -96,7 +96,7 @@
             
         </th>
         <?php
-            // $conn=mysqli_connect("localhost","root","","review");
+            // $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=1");
             while($row=mysqli_fetch_assoc($result))
             {
@@ -111,14 +111,16 @@
             ?>
     </table>
     <script>
-        function approve(sno){
+        function approve(sno,regno,guide){
             if (confirm('Are you sure you want to approve?')) {
                 // Save it!
                 $.ajax({
                     type: "POST",
                     url: "guide_approve_db.php",
                     data: {
-                        sno:sno
+                        sno:sno,
+                        regno:regno,
+                        guide:guide
                     },
                     success: function (blabla) {
                         console.log(blabla)
@@ -130,7 +132,7 @@
             // Do nothing!
             }
         }
-        function reject(sno,email){
+        function reject(sno,email,regno,guide){
             let message;
             if (message=prompt('Please mention the reason for rejecting')) {
                 // Save it!

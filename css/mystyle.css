@@ -99,7 +99,9 @@
 
   .consent-form{
     width: 50%;
-    margin: 50px auto;
+    margin: 0px auto;
+    position:relative;
+    top:50px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     padding: 30px 20px;

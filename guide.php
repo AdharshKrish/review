@@ -11,6 +11,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
     <title>Review System</title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -74,16 +78,20 @@
                                         <div class="message-center">
                                         <?php
                 session_start();
-                if(!isset($_SESSION['email'] )){
-                
+                if(!isset($_SESSION['email'] ) ){
                     header('location:index1.html');
                 }
-                if($_SESSION['role']!='student.php' ){
+                if($_SESSION['role']!='guide.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","root","root","review");
-                // echo $_SESSION['email'];//="adharshkrish@outlook.com";
-                $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
+                 $conn=mysqli_connect("localhost","root","root","review");
+                 
+                 $result=mysqli_query($conn,"select * from facultylogin where email='".$_SESSION['email']."'");
+                 while($row=mysqli_fetch_assoc($result))
+                 {
+                     $_SESSION['name']=$row['name'];
+                 }
+                $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['name']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
                 {
                     $time=$row['time'];
@@ -151,7 +159,7 @@
                         
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="consent()">Consent Form</a></li>
+                                <li><a >Consent Form</a></li>
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-editor.html">Editor</a></li>
@@ -160,8 +168,8 @@
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-bootstrap.html">Basic Tables</a></li>
-                                <li><a href="table-datatable.html">Data Tables</a></li>
+                                <li><a onclick="pending()" >Pending Requests</a></li>
+                                <li><a onclick="accepted()">Accepted Requests</a></li>
                             </ul>
                         </li>
                        
@@ -174,66 +182,166 @@
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
-        <div id="consent">
-        <form action="consent_submit.php" method="post" class="consent-form">
-<h2 align="center" style="color:#1976D2">STUDENT CONSENT FORM</h2>
-        <div class="form__group field">
-          <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
-          <label class="form__label">Student Name</label>
+        <div id="pending" style="display:none">
+        <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Pending Requests</h4>
+        <h6 class="card-subtitle">Approve the requests you prefer</h6>
+        <div class="table-responsive m-t-40">
+            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th>Name</th>
+                        <th>Register Number</th>
+                        <th>Email</th>
+                        <th>Approve</th>
+                        <th>Reject</th>
+                      
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Register Number</th>
+                        <th>Email</th>
+                        <th>Approve</th>
+                        <th>Reject</th>
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
         
-        </div>
-        <div class="form__group field">
-          <input type="text" class="form__field" placeholder="Register Number" name="regno"  required />
-          <label  class="form__label">Register Number</label>
-      
-        </div>
-        <div class="form__group field" style="display:none" >
-          <input type="text" class="form__field" placeholder="Email ID" name="email" value="<?php echo $_SESSION['email'] ?>"  required />
-          <label  class="form__label">Email ID</label>
-        </div>
- 
-        <div class="form__group field">
-        <select class="form__field" style="color:#9b9b9b" name="guide">
-            <option value="Select" selected="true" disabled>Select your guide</option>
-            <?php
-                $conn=mysqli_connect("localhost","root","root","review");
-                $result=mysqli_query($conn,"select * from facultylogin");
-                while($row=mysqli_fetch_assoc($result))
-                {
-                    ?>
-                    <option style="color:#000" value="<?php echo $row['name'];?>"><?php echo $row['name'];?></option>
                     <?php
-                }
-            ?>
-        </select>
+       $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=0");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           ?>
+           <tr>
+           <td><?php echo $row['name']?></td>
+           <td><?php echo $row['regno']?></td>
+           <td><?php echo $row['email']?></td>
+           <td><button name="guide_accept" style=color:green onclick="approve('<?php echo $row['sno']?>','<?php echo $row['regno']?>','<?php echo $row['guide']?>')">Approve</button></td>
+           <td><button name="guide_reject" style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>','<?php echo $row['regno']?>','<?php echo $row['guide']?>')">Reject</button></td>
+                    </tr>
+           <?php
+       }
+       ?>
+ 
+                
+                </tbody>
+            </table>
         </div>
-        <div class="form__group field">
-            <?php
-                $disabled="";
-                $result=mysqli_query($conn,"select * from approved where email='".$_SESSION['email']."'");
-                if($row=mysqli_fetch_assoc($result)){
-                    $disabled="disabled";
-                }
-                $result=mysqli_query($conn,"select * from consent where email='".$_SESSION['email']."'");
-                if($row=mysqli_fetch_assoc($result)){
-                    $disabled="disabled";
-                }
-            ?>
-        <button class="submit" name="datetime" <?php echo $disabled ?>>Submit</button>
-            </div>
-    </form>
+    </div>
+</div>
+    </div>
+    <div id="accepted" style="display:none">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Accepted Students</h4>
+        <h6 class="card-subtitle">Approve the requests you prefer</h6>
+        <div class="table-responsive m-t-40">
+            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th>Name</th>
+                        <th>Register Number</th>
+                        <th>Email</th>
+                       
+                      
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Register Number</th>
+                        <th>Email</th>
+                        
+                        
+                    </tr>
+                </tfoot>
+                <tbody>
+        
+                    <?php
+       $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=1");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           ?>
+           <tr>
+           <td><?php echo $row['name']?></td>
+           <td><?php echo $row['regno']?></td>
+           <td><?php echo $row['email']?></td>
+          
+                    </tr>
+           <?php
+       }
+       ?>
+ 
+                
+                </tbody>
+            </table>
         </div>
-            </div>
+    </div>
+</div>  
+        </div>
+    </div>
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
 
     <script>
-        function consent(){
-            document.getElementById('consent').style.display='block';
+        function pending(){
+            document.getElementById('pending').style.display='block';
+            document.getElementById('accepted').style.display='none';
         }
-        function none(){
-            document.getElementById('consent').style.display='none';
+        function accepted(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='block';
+        }
+        function approve(sno,regno,guide){
+            if (confirm('Are you sure you want to approve?')) {
+                // Save it!
+                $.ajax({
+                    type: "POST",
+                    url: "guide_approve_db.php",
+                    data: {
+                        sno:sno,
+                        regno:regno,
+                        guide:guide
+                    },
+                    success: function (blabla) {
+                        console.log(blabla)
+                        window.location.reload()
+                    }
+                });
+                
+            } else {
+            // Do nothing!
+            }
+        }
+        function reject(sno,email,regno,guide){
+            let message;
+            if (message=prompt('Please mention the reason for rejecting')) {
+                // Save it!
+                $.ajax({
+                    type: "POST",
+                    url: "guide_approve_db.php",
+                    data: {
+                        reject:true,
+                        sno:sno,
+                        email:email,
+                        message:message,
+                        regno:regno,
+                        guide:guide
+                    },
+                    success: function (blabla) {
+                        console.log(blabla)
+                        window.location.reload()
+                    }
+                });
+                
+            } else {
+            // Do nothing!
+            }
         }
     </script>
 

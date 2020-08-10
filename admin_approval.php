@@ -33,7 +33,7 @@
         if($_SESSION['role']!='admin_approval.php' ){
             header('location:'.$_SESSION['role']);
         }
-            $conn=mysqli_connect("localhost","root","","review");
+            $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from consent where guide_approval=1");
             while($row=mysqli_fetch_assoc($result))
             {
@@ -63,7 +63,7 @@
         </th>
         <?php
         
-            $conn=mysqli_connect("localhost","root","","review");
+            $conn=mysqli_connect("localhost","root","root","review");
             $result=mysqli_query($conn,"select * from approved");
             while($row=mysqli_fetch_assoc($result))
             {
