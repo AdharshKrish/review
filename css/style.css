@@ -1080,7 +1080,7 @@ h6.h1 {
 .header {
   position: relative;
   z-index: 50;
-  background: #fff;
+  background: yellowgreen;
   box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 }
 .header .top-navbar {

@@ -63,8 +63,8 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i style="color:white" class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"><a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i style="color:white" class="ti-menu"></i></a> </li>
                         <!-- Messages -->
                         
                         <!-- End Messages -->
@@ -75,7 +75,7 @@
                         
                         <!-- Comment -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i style="color:white" class="fa fa-bell"></i>
 								<div class="notify"> </div>
 							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
@@ -197,9 +197,9 @@
                     <th>Name</th>
                         <th>Register Number</th>
                         <th>Email</th>
+                        <th>Course</th>
                         <th>Guide</th>
-                        <th>Approve</th>
-                        <th>Reject</th>
+                        <th>Status</th>
                       
                     </tr>
                 </thead>
@@ -208,9 +208,9 @@
                         <th>Name</th>
                         <th>Register Number</th>
                         <th>Email</th>
+                        <th>Course</th>
                         <th>Guide</th>
-                        <th>Approve</th>
-                        <th>Reject</th>
+                        <th>Status</th>
                         
                     </tr>
                 </tfoot>
@@ -225,10 +225,13 @@
            <td><?php echo $row['name']?></td>
            <td><?php echo $row['regno']?></td>
            <td><?php echo $row['email']?></td>
+           <td><?php echo $row['course']?></td>
            <td><?php echo $row['guide']?></td>
-           <td><button style=color:green onclick='<?php echo 'approve("'.$row['sno'].'","'.$row['regno'].'","'.$row['name'].'","'.$row['email'].'","'.$row['guide'].'")'?>'>Approve</button></td>
-                <td><button style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>','<?php echo $row['guide']?>','<?php echo $row['regno']?>')">Reject</button></td>
-                 </tr>
+           <td>
+               <button style=color:green onclick='<?php echo 'approve("'.$row['sno'].'","'.$row['regno'].'","'.$row['name'].'","'.$row['email'].'","'.$row['course'].'","'.$row['guide'].'")'?>'>Approve</button>
+               <button style=color:red onclick="reject('<?php echo $row['sno']?>','<?php echo $row['email']?>','<?php echo $row['guide']?>','<?php echo $row['regno']?>')">Reject</button>
+            </td>
+            </tr>
            <?php
        }
        ?>
@@ -252,8 +255,8 @@
                     <th>Name</th>
                         <th>Register Number</th>
                         <th>Email</th>
+                        <th>Course</th>
                        <th>Guide</th>
-                      
                     </tr>
                 </thead>
                 <tfoot>
@@ -261,8 +264,8 @@
                         <th>Name</th>
                         <th>Register Number</th>
                         <th>Email</th>
+                        <th>Course</th>
                         <th>Guide</th>
-                        
                     </tr>
                 </tfoot>
                 <tbody>
@@ -276,6 +279,7 @@
            <td><?php echo $row['name']?></td>
            <td><?php echo $row['regno']?></td>
            <td><?php echo $row['email']?></td>
+           <td><?php echo $row['course']?></td>
            <td><?php echo $row['guide']?></td>
           
                     </tr>
@@ -383,7 +387,7 @@
             document.getElementById('accepted').style.display='none';
             document.getElementById('log').style.display='block';
         }
-        function approve(sno,reg,name,email,guide){
+        function approve(sno,reg,name,email,course,guide){
             if (confirm('Are you sure you want to approve?')) {
                 // Save it!
                 $.ajax({
@@ -394,6 +398,7 @@
                         reg:reg,
                         name:name,
                         email:email,
+                        course:course,
                         guide:guide
                     },
                     success: function (blabla) {

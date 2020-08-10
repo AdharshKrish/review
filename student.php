@@ -50,8 +50,8 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i style="color:white" class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i style="color:white" class="ti-menu"></i></a> </li>
                         <!-- Messages -->
                         
                         <!-- End Messages -->
@@ -62,7 +62,7 @@
                         
                         <!-- Comment -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i style="color:white" class="fa fa-bell"></i>
 								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
 							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
@@ -185,7 +185,14 @@
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Register Number" name="regno"  required />
           <label  class="form__label">Register Number</label>
-      
+        </div>
+        
+        <div class="form__group field">
+        <select class="form__field" style="color:#9b9b9b" name="course">
+            <option value="Select" selected="true" disabled>Select your course</option>
+            <option style="color:#000" value="Select">M.Tech - DCS</option>
+            <option style="color:#000" value="Select">M.Tech - IS</option>
+        </select>
         </div>
         <div class="form__group field" style="display:none" >
           <input type="text" class="form__field" placeholder="Email ID" name="email" value="<?php echo $_SESSION['email'] ?>"  required />

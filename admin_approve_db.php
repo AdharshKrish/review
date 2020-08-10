@@ -18,7 +18,7 @@ else{
    $result=mysqli_query($conn,"update timeanddate set admin_approve='".$date_clicked."' where regno='".$_POST['reg']."' and guide='".$_POST['guide']."'");
 
     // $result=mysqli_query($conn,"update consent set guide_approval=1 where sno=".$_POST['sno']);
-    $result=mysqli_query($conn,"insert into approved values('".$_POST['reg']."','".$_POST['name']."','".$_POST['email']."','".$_POST['guide']."')");
+    $result=mysqli_query($conn,"insert into approved values('".$_POST['reg']."','".$_POST['name']."','".$_POST['email']."','".$_POST['course']."','".$_POST['guide']."')");
     echo $result;
     $result=mysqli_query($conn,"insert into notify values(null,'".$_POST['email']."','".$date_clicked."','Admin Approval Successful',1)"); 
     echo $result;
