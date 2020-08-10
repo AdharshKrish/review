@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2020 at 10:51 AM
--- Server version: 10.5.0-MariaDB
+-- Generation Time: Aug 10, 2020 at 12:10 PM
+-- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -32,15 +32,9 @@ CREATE TABLE `approved` (
   `regno` varchar(10) NOT NULL,
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
+  `course` varchar(20) NOT NULL,
   `guide` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `approved`
---
-
-INSERT INTO `approved` (`regno`, `name`, `email`, `guide`) VALUES
-('17CS102', 'Adharsh', 'adharshkrish@outlook.com', 'Shafreena');
 
 -- --------------------------------------------------------
 
@@ -53,6 +47,7 @@ CREATE TABLE `consent` (
   `name` varchar(30) NOT NULL,
   `regno` varchar(10) NOT NULL,
   `email` varchar(30) NOT NULL,
+  `course` varchar(20) NOT NULL,
   `guide` varchar(30) NOT NULL,
   `guide_approval` tinyint(1) NOT NULL DEFAULT 0,
   `time` varchar(30) NOT NULL
@@ -62,8 +57,8 @@ CREATE TABLE `consent` (
 -- Dumping data for table `consent`
 --
 
-INSERT INTO `consent` (`sno`, `name`, `regno`, `email`, `guide`, `guide_approval`, `time`) VALUES
-(57, 'ABC', '17CS123', 'adharshkrish@pec.edu', 'Shafreena', 1, '2020-08-10 10:06:24');
+INSERT INTO `consent` (`sno`, `name`, `regno`, `email`, `course`, `guide`, `guide_approval`, `time`) VALUES
+(57, 'ABC', '17CS123', 'adharshkrish@pec.edu', 'M.Tech - IS', 'Shafreena', 1, '2020-08-10 10:06:24');
 
 -- --------------------------------------------------------
 
@@ -143,6 +138,7 @@ CREATE TABLE `roles` (
   `name` varchar(30) DEFAULT NULL,
   `regno` varchar(10) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
+  `course` varchar(20) NOT NULL,
   `role` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -150,14 +146,14 @@ CREATE TABLE `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`sno`, `name`, `regno`, `email`, `role`) VALUES
-(1, 'SHAF', NULL, 'shafreena2000@pec.edu', 'guide'),
-(2, 'shafreena', '17CS148', 'shafreena2000@gmail.com', 'student'),
-(3, 'ADMIN', NULL, 'shaffathima@gmail.com', 'admin'),
-(4, 'Adharsh', '17CS102', 'adharshkrish@outlook.com', 'student'),
-(5, 'Gayathri', '17CS113', 'agayathrics2017@gmail.com', 'student'),
-(6, 'gaya', '17CS111', 'agayathrics2017@pec.edu', 'student'),
-(7, 'ABC', '17CS123', 'adharshkrish@pec.edu', 'student');
+INSERT INTO `roles` (`sno`, `name`, `regno`, `email`, `course`, `role`) VALUES
+(1, 'SHAF', NULL, 'shafreena2000@pec.edu', '', 'guide'),
+(2, 'shafreena', '17CS148', 'shafreena2000@gmail.com', '', 'student'),
+(3, 'ADMIN', NULL, 'shaffathima@gmail.com', '', 'admin'),
+(4, 'Adharsh', '17CS102', 'adharshkrish@outlook.com', '', 'student'),
+(5, 'Gayathri', '17CS113', 'agayathrics2017@gmail.com', '', 'student'),
+(6, 'gaya', '17CS111', 'agayathrics2017@pec.edu', '', 'student'),
+(7, 'ABC', '17CS123', 'adharshkrish@pec.edu', '', 'student');
 
 -- --------------------------------------------------------
 
@@ -185,7 +181,7 @@ INSERT INTO `timeanddate` (`regno`, `consent_time`, `guide`, `guide_approve`, `g
 ('17CS102', '2020-08-09 23:27:45', 'Shafreena', '2020-08-10 09:33:11', NULL, NULL, '2020-08-10 09:38:05', NULL, NULL),
 ('17CS113', '2020-08-10 09:32:24', 'Shafreena', NULL, '2020-08-10 09:33:36', 'testing', NULL, NULL, NULL),
 ('17CS111', '2020-08-10 09:37:09', 'Shafreena', '2020-08-10 09:37:38', NULL, NULL, NULL, '2020-08-10 09:38:23', 'Testing 2'),
-('17CS123', '2020-08-10 10:06:24', 'Shafreena', '2020-08-10 10:18:34', NULL, NULL, NULL, NULL, NULL);
+('17CS123', '2020-08-10 10:06:24', 'Shafreena', '2020-08-10 15:26:34', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
