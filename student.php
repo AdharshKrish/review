@@ -50,8 +50,8 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i style="color:white" class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i style="color:white" class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="#"><i style="color:white; font-size:25px;" class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="#"><i style="color:white; font-size:25px;" class="ti-menu"></i></a> </li>
                         <!-- Messages -->
                         
                         <!-- End Messages -->
@@ -99,7 +99,7 @@
                     echo '<a href="#">
                                 <div class="btn '.$color.' btn-circle m-r-10"><i class="'.$icon.'"></i></div>
                                 <div class="mail-contnet">
-                                    <h5>'.$title.'</h5> <span class="mail-desc">'.$row['message'].'</span> <span class="time">'.$time.'</span>
+                                    <h5>'.$title.'</h5> <span class="mail-desc">'.$row['message'].' by '.$row['about'].'</span> <span class="time">'.$time.'</span>
                                 </div>
                             </a>';
                       
@@ -109,7 +109,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                        <a class="nav-link text-center" href="#;"> <strong>Check all notifications</strong> <i  class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -123,7 +123,7 @@
                                 <ul class="dropdown-user">
                                     <!-- <li><a href="#"><i class="ti-user"></i> Profile</a></li> -->
                                     
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="logout.php"><i style="color:black; font-size:20px;" class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -141,27 +141,27 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="none()">None </a></li>
+                                <li><a style="color:white" onclick="none()">None </a></li>
                                 <!-- <li><a href="index1.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         
                         
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="consent()">Consent Form</a></li>
+                                <li><a style="color:white" onclick="consent()">Consent Form</a></li>
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-editor.html">Editor</a></li>
                                 <li><a href="form-dropzone.html">Dropzone</a></li> -->
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-bootstrap.html">Basic Tables</a></li>
-                                <li><a href="table-datatable.html">Data Tables</a></li>
+                                <li><a style="color:white" href="#">Basic Tables</a></li>
+                                <li><a style="color:white" href="#">Data Tables</a></li>
                             </ul>
                         </li>
                        
@@ -176,7 +176,7 @@
         <div class="page-wrapper">
         <div id="consent">
         <form action="consent_submit.php" method="post" class="consent-form">
-<h2 align="center" style="color:#1976D2">STUDENT CONSENT FORM</h2>
+<h2 align="center" style="color:#121545">STUDENT CONSENT FORM</h2>
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
           <label class="form__label">Student Name</label>
@@ -188,10 +188,10 @@
         </div>
         
         <div class="form__group field">
-        <select class="form__field" style="color:#9b9b9b" name="course">
+        <select class="form__field" name="course">
             <option value="Select" selected="true" disabled>Select your course</option>
-            <option style="color:#000" value="Select">M.Tech - DCS</option>
-            <option style="color:#000" value="Select">M.Tech - IS</option>
+            <option style="color:#000" value="M.Tech(DCS)">M.Tech - DCS</option>
+            <option style="color:#000" value="M.Tech(IS)">M.Tech - IS</option>
         </select>
         </div>
         <div class="form__group field" style="display:none" >
@@ -200,8 +200,8 @@
         </div>
  
         <div class="form__group field">
-        <select class="form__field" style="color:#9b9b9b" name="guide">
-            <option value="Select" selected="true" disabled>Select your guide</option>
+        <select class="form__field"  name="guide">
+            <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
                 $conn=mysqli_connect("localhost","root","root","review");
                 $result=mysqli_query($conn,"select * from facultylogin");
@@ -216,10 +216,12 @@
         </div>
         <div class="form__group field">
             <?php
+                $guidedby="";
                 $disabled="";
                 $result=mysqli_query($conn,"select * from approved where email='".$_SESSION['email']."'");
                 if($row=mysqli_fetch_assoc($result)){
                     $disabled="disabled";
+                    $guidedby=$row['guide'];
                 }
                 $result=mysqli_query($conn,"select * from consent where email='".$_SESSION['email']."'");
                 if($row=mysqli_fetch_assoc($result)){
@@ -228,6 +230,23 @@
             ?>
         <button class="submit" name="datetime" <?php echo $disabled ?>>Submit</button>
             </div>
+            <div id="response"> <h6 align="center"><?php
+            $result=mysqli_query($conn,"select * from consent where email='".$_SESSION['email']."'");
+            if($row=mysqli_fetch_assoc($result)){
+                if($row['guide_approval']==0){
+                   echo 'Your request has been sent to '.$row['guide'].' for approval';
+                }
+                else if($row['guide_approval']==1){
+                   echo 'Your request has been sent to HOD for approval';
+                    
+                }
+               
+              
+            }
+            if($guidedby!=""){
+                echo $guidedby.' is your guide';
+            }
+            ?></h6></div>
     </form>
         </div>
             </div>

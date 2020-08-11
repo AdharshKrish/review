@@ -54,8 +54,8 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i style="color:white" class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i style="color:white" class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="#"><i  style="color:white; font-size:25px" class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="#"><i style="color:white; font-size:25px" class="ti-menu"></i></a> </li>
                         <!-- Messages -->
                         
                         <!-- End Messages -->
@@ -66,7 +66,7 @@
                         
                         <!-- Comment -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i style="color:white" class="fa fa-bell"></i>
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i style="color:white ; " class="fa fa-bell"></i>
 								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
 							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
@@ -99,15 +99,17 @@
                         $title='Consent rejected';
                         $color='btn-danger';
                         $icon='ti-layout-placeholder';
+                        $by=' by Admin';
                     }else if($row['category']==1){
                         $title='Consent approved';
                         $color='btn-success';
                         $icon='ti-check-box';
+                        $by=' - '.$row['about'];
                     }
                     echo '<a href="#">
                                 <div class="btn '.$color.' btn-circle m-r-10"><i class="'.$icon.'"></i></div>
                                 <div class="mail-contnet">
-                                    <h5>'.$title.'</h5> <span class="mail-desc">'.$row['message'].'</span> <span class="time">'.$time.'</span>
+                                    <h5>'.$title.'</h5> <span class="mail-desc">'.$row['message'].$by.'</span> <span class="time">'.$time.'</span>
                                 </div>
                             </a>';
                       
@@ -117,7 +119,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                        <a class="nav-link text-center" href="#"> <strong>Check all notifications</strong> <i style="color:white;font-size:25px" class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -131,7 +133,7 @@
                                 <ul class="dropdown-user">
                                     <!-- <li><a href="#"><i class="ti-user"></i> Profile</a></li> -->
                                     
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="logout.php"><i style= "color:black ; font-size:20px" class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -149,27 +151,27 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i style= "color:white ; font-size:25px"class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="none()">None </a></li>
+                                <li><a  style="color:white;" onclick="mystudents()">My Students</a></li>
                                 <!-- <li><a href="index1.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         
                         
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style= "color:white ; font-size:25px" class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a >Consent Form</a></li>
+                                <li><a style="color:white;" >Consent Form</a></li>
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-editor.html">Editor</a></li>
                                 <li><a href="form-dropzone.html">Dropzone</a></li> -->
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style= "color:white ; font-size:25px" class="fa fa-table"></i><span class="hide-menu">Requests</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="pending()" >Pending Requests</a></li>
-                                <li><a onclick="accepted()">Accepted Requests</a></li>
+                                <li><a style="color:white;" onclick="pending()" >Pending Requests</a></li>
+                                <li><a style="color:white;" onclick="accepted()">Accepted Requests</a></li>
                             </ul>
                         </li>
                        
@@ -198,15 +200,6 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Register Number</th>
-                        <th>Email</th>
-                        <th>Course</th>
-                        <th>Status</th>
-                    </tr>
-                </tfoot>
                 <tbody>
     <?php
        $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=0");
@@ -246,19 +239,12 @@
                     <th>Name</th>
                         <th>Register Number</th>
                         <th>Email</th>
+                        <th>Course</th>
                        
                       
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Register Number</th>
-                        <th>Email</th>
-                        
-                        
-                    </tr>
-                </tfoot>
+           
                 <tbody>
         
                     <?php
@@ -270,6 +256,7 @@
            <td><?php echo $row['name']?></td>
            <td><?php echo $row['regno']?></td>
            <td><?php echo $row['email']?></td>
+           <td><?php echo $row['course']?></td>
           
                     </tr>
            <?php
@@ -283,19 +270,39 @@
     </div>
 </div>  
         </div>
+       <center> <div   id="mystudents">
+            <div class="row ">
+             <div  class="student-card col-md-6 ">
+             <h2 style="background-color:#121545; margin:-30px -30px 20px -30px; padding:20px; color:#FFF; font-weight:700">My Students</h2>
+             <div class="row ">
+             <?php
+       $result=mysqli_query($conn,"select * from approved where guide='".$_SESSION['name']."'");
+       while($row=mysqli_fetch_assoc($result))
+       {
+            echo '<div style="font-size:20px" class=col-6>'.$row['name'].'</div><div class=col-6>'.$row['regno'].'</div>';
+       }
+              ?>
+              </div>
+             </div>
     </div>
+        </div>
+    </center>
+    </div>
+
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-
+    
     <script>
         function pending(){
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
+            document.getElementById('mystudents').style.display='none';
         }
         function accepted(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='block';
+            document.getElementById('mystudents').style.display='none';
         }
         function approve(sno,regno,guide){
             if (confirm('Are you sure you want to approve?')) {
@@ -310,6 +317,7 @@
                     },
                     success: function (blabla) {
                         console.log(blabla)
+                        alert('The consent of '+regno+' has been sent to HOD  for approval')
                         window.location.reload()
                     }
                 });
@@ -342,6 +350,11 @@
             } else {
             // Do nothing!
             }
+        }
+        function mystudents(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('mystudents').style.display='block';
         }
     </script>
 

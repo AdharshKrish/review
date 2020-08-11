@@ -48,12 +48,12 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <b><img style="width:20px" src="img/logo.png" alt="homepage" class="dark-logo" /></b>
+                        <b><img style="width:30px" src="img/logo.png" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span>
+                        <span  >
                             <!-- <img src="images/logo-text.png" alt="homepage" class="dark-logo" /> -->
-                            PEC
+                           <b > PEC</b>
 
                         </span>
                     </a>
@@ -63,8 +63,8 @@
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i style="color:white" class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"><a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i style="color:white" class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i style="color:white; font-size:25px;" class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"><a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i style="color:white; font-size:25px;" class="ti-menu"></i></a> </li>
                         <!-- Messages -->
                         
                         <!-- End Messages -->
@@ -75,7 +75,7 @@
                         
                         <!-- Comment -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i style="color:white" class="fa fa-bell"></i>
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i style="color:white; " class="fa fa-bell"></i>
 								<div class="notify"> </div>
 							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
@@ -119,7 +119,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i style="color:white; font-size:25px;" class="fa fa-angle-right"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -133,7 +133,7 @@
                                 <ul class="dropdown-user">
                                     <!-- <li><a href="#"><i class="ti-user"></i> Profile</a></li> -->
                                     
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="logout.php"><i  style="color:black; font-size:20px;"class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -143,36 +143,36 @@
         </div>
         <!-- End header header -->
         <!-- Left Sidebar  -->
-        <div class="left-sidebar">
+        <div  class="left-sidebar">
             <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
+            <div  class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
+                <nav   class="sidebar-nav">
+                    <ul  id="sidebarnav">
+                        <li  class="nav-devider"></li>
                         <li class="nav-label">Home</li>
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="none()">None </a></li>
+                                <li><a style="color:white;" onclick="students()">Guides-Students </a></li>
                                 <!-- <li><a href="index1.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         
                         
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a >Consent Form</a></li>
+                                <li><a  style="color:white;" >Consent Form</a></li>
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-editor.html">Editor</a></li>
                                 <li><a href="form-dropzone.html">Dropzone</a></li> -->
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-table"></i><span class="hide-menu">Requests</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a onclick="pending()" >Pending Requests</a></li>
-                                <li><a onclick="accepted()">Accepted Requests</a></li>
-                                <li><a onclick="log()">Consent Submission Log</a></li>
+                                <li><a  style="color:white;" onclick="pending()" >Pending Requests</a></li>
+                                <li><a  style="color:white;" onclick="accepted()">Accepted Requests</a></li>
+                                <li><a  style="color:white;" onclick="log()">Consent Submission Log</a></li>
                             </ul>
                         </li>
                        
@@ -185,11 +185,43 @@
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
+        <div id="students"><h1 style="color:black">Approved Batches</h1>
+            <div class="row">
+                <?php
+                $colors=['red','blue','yellow','green','pink','orange','purple'];
+                 $result=mysqli_query($conn,"select * from approved group by guide");
+                 $i=0;
+                 while($row=mysqli_fetch_assoc($result))
+                 {
+                    echo '<div class="col-lg-3 col-md-4 col-sm-6 g-card">
+                    <h2 class="gcard-title" style="background-color:'.$colors[$i].'">'.$row['guide'].'</h2>';
+                    $result1=mysqli_query($conn,"select * from approved where guide='".$row['guide']."'");
+                    
+                    while($row1=mysqli_fetch_assoc($result1)){
+                        echo '<div class="row">
+                        <div  class="col-12"><h3>
+                        '.$row1['name'].' ('.$row1['regno'].')</h3>
+                        </div>
+                        </div>';
+                       
+                    }
+                    echo'</div>';
+                    $i++;
+                    if($i==7){
+                        $i=0;
+                    }
+                 }
+                
+                ?>
+
+            </div>
+            
+        </div>
         <div id="pending" style="display:none">
         <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Pending Requests</h4>
-        <h6 class="card-subtitle">Approve the requests you prefer</h6>
+        <h2 class="card-title">Pending Requests</h2>
+        <h3 class="card-subtitle">Approve the requests you prefer</h3>
         <div class="table-responsive m-t-40">
             <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
@@ -203,17 +235,7 @@
                       
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Register Number</th>
-                        <th>Email</th>
-                        <th>Course</th>
-                        <th>Guide</th>
-                        <th>Status</th>
-                        
-                    </tr>
-                </tfoot>
+            
                 <tbody>
         
                     <?php
@@ -247,7 +269,7 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Accepted Students</h4>
-        <h6 class="card-subtitle">---------------------</h6>
+        <h6 class="card-subtitle">List of students you approved</h6>
         <div class="table-responsive m-t-40">
             <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
@@ -259,15 +281,7 @@
                        <th>Guide</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Register Number</th>
-                        <th>Email</th>
-                        <th>Course</th>
-                        <th>Guide</th>
-                    </tr>
-                </tfoot>
+            
                 <tbody>
         
                     <?php
@@ -316,22 +330,7 @@
                         <th>Reason for Admin Rejection</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                    <!-- <th>Name</th> -->
-                    <th>Register Number</th>
-                        <!-- <th>Email</th> -->
-                        <th>Guide</th>
-                        <th>Consent Submitted Time</th>
-                        <th>Guide Approved Time</th>
-                        <th>Guide Rejected Time</th>
-                        <th>Reason for Guide Rejection</th>
-                        <th>Admin Approved Time</th>
-                        <th>Admin Rejected Time</th>
-                        <th>Reason for Admin Rejection</th>
-                        
-                    </tr>
-                </tfoot>
+          
                 <tbody>
         
                     <?php
@@ -375,17 +374,26 @@
         function pending(){
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
+            document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='none';
         }
         function accepted(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='block';
+            document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='none';
         }
         function log(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
+            document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='block';
+        }
+        function students(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('log').style.display='none';
+            document.getElementById('students').style.display='block';
         }
         function approve(sno,reg,name,email,course,guide){
             if (confirm('Are you sure you want to approve?')) {

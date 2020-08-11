@@ -1,121 +1,157 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
 .form__group {
-    position: relative;
-    padding-top: 15px;
-    margin: 10px auto;
+  position: relative;
+  padding-top: 15px;
+  margin: 10px auto;
+  width: 80%;
+
+}
+
+.form__field {
+  width: 100%;
+  border: 1px solid #9b9b9b;
+  outline: 0;
+  font-size: 15px;
+  font-weight: 300;
+  color: #000;
+  padding: 7px;
+  border-radius: 5px;
+  background: transparent;
+  transition: border-color 0.2s;
+
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown~.form__label {
+  font-size: 1rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  background-color: white;
+  padding: 0 3px;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 500;
+  border-width: 1px;
+  border-color: #121545;
+  border-image-slice: 1;
+}
+
+.form__field:focus~.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #121545;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+.submit {
+  /* float: right; */
+  display: block;
+  margin: 20px auto;
+  width: 80%;
+  height: 40px;
+  border: 2px solid #121545;
+  border-radius: 5px;
+  background-color: #121545;
+  color: white;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.submit:hover {
+  color: #121545;
+  background-color: white;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  border: 2px solid #a0a0a0;
+  border-radius: 5px;
+  background-color: #a0a0a0;
+  color: white;
+}
+
+.consent-form h2 {
+  font-family: 'EB Garamond', serif;
+  font-weight: 900;
+}
+
+.consent-form {
+  width: 50%;
+  margin: 0px auto;
+  position: relative;
+  top: 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 30px 20px;
+}
+
+.student-card {
+  margin: 30px auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+
+
+}
+
+
+
+
+
+#students {
+  margin: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.g-card {
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.gcard-title {
+  margin: -20px -20px 10px -20px;
+  padding: 8px 20px;
+  border-radius: 10px 0px 10px 0px;
+  color: #FFF;
+
+}
+
+@media (max-width: 767px) {
+
+  .consent-form {
     width: 80%;
 
   }
-  
-  .form__field {
-    width: 100%;
-    border: 1px solid #9b9b9b;
-    outline: 0;
-    font-size: 15px;
-    font-weight: 300;
-    color: #000;
-    padding: 7px;
-    border-radius: 5px;
-    background: transparent;
-    transition: border-color 0.2s;
-  
-  }
-  
-  .form__field::placeholder {
-    color: transparent;
-  }
-  
-  .form__field:placeholder-shown~.form__label {
-    font-size: 1rem;
-    cursor: text;
-    top: 20px;
-  }
-  
-  .form__label {
-    position: absolute;
-    top: 0;
-    left: 12px;
-    background-color: white;
-    padding: 0 3px;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: #9b9b9b;
-  }
-  
-  .form__field:focus {
-    padding-bottom: 6px;
-    font-weight: 500;
-    border-width: 1px;
-    border-color: #1976D2;
-    border-image-slice: 1;
-  }
-  
-  .form__field:focus~.form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: #1976D2;
-    font-weight: 700;
-  }
-  
-  /* reset input */
-  .form__field:required,
-  .form__field:invalid {
-    box-shadow: none;
-  }
-  
-  .submit {
-    /* float: right; */
-    display: block;
-    margin: 20px auto;
-    width: 80%;
-    height: 40px;
-    border: 2px solid #1976D2;
-    border-radius: 5px;
-    background-color: #1976D2;
-    color: white;
-    font-weight: 700;
-    transition: 0.3s;
-  }
-  .submit:hover{
-      color:#1976D2;
-      background-color: white;
-      cursor: pointer;
-  }
-  .submit:disabled{
-    border: 2px solid #a0a0a0;
-    border-radius: 5px;
-    background-color: #a0a0a0;
-    color:white;
-  }
-  
-  .consent-form h2{
-    font-family: 'EB Garamond', serif;
-    font-weight: 900;
-  }
+}
 
-  .consent-form{
-    width: 50%;
-    margin: 0px auto;
-    position:relative;
-    top:50px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 30px 20px;
-  }
-  
-  @media (max-width: 767px) {
-
-    .consent-form{
-        width: 80%;
-        
-      }
-  }
-
-  /* @media (max-width: 400px) {
+/* @media (max-width: 400px) {
 
     
   } */
