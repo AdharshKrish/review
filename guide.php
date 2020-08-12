@@ -84,9 +84,9 @@
                 if($_SESSION['role']!='guide.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                 $conn=mysqli_connect("localhost","root","root","review");
+                 $conn=mysqli_connect("localhost","root","","review");
                  
-                 $result=mysqli_query($conn,"select * from facultylogin where email='".$_SESSION['email']."'");
+                 $result=mysqli_query($conn,"select * from role where email='".$_SESSION['email']."'");
                  while($row=mysqli_fetch_assoc($result))
                  {
                      $_SESSION['name']=$row['name'];

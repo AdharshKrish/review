@@ -1641,7 +1641,8 @@ textarea {
 .sidebar-nav > ul > li > a .label {
   position: absolute;
   right: 35px;
-  top: 8px;
+  top: 13px;
+  /* height:100px; */
 }
 .sidebar-nav > ul > li > a.active {
   font-weight: 400;

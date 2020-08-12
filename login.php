@@ -11,7 +11,7 @@ if(isset($_SESSION['role'])){
 
 $_SESSION['email'] = $email;
 $_SESSION['pic'] = $_POST['pic'];
-$conn=mysqli_connect("localhost","root","root","review");
+$conn=mysqli_connect("localhost","root","","review");
 $result=mysqli_query($conn,"select * from roles where email='$email'");   
 while($row=mysqli_fetch_assoc($result))
 {

@@ -1,21 +1,4 @@
 <?php
- $conn=mysqli_connect("localhost","root","","review");
- if(isset($_POST['datetime']))
-{
-    date_default_timezone_set('Asia/Kolkata');
-    $date_clicked = date('Y-m-d H:i:s');;
-}
-$regno=strtoupper($_POST['regno']);
- $result=mysqli_query($conn,"insert into consent values(null,'".$_POST['name']."','".$regno."','".$_POST['email']."','".$_POST['course']."','".$_POST['guide']."',0,'".$date_clicked."')");
- $result=mysqli_query($conn,"insert into timeanddate values('".$regno."','".$date_clicked."','".$_POST['guide']."',null,null,null,null,null,null)");
-//  header('location:login.php');
- $result=mysqli_query($conn,"update roles set name='".$_POST['name']."', regno='".$regno."', course='".$_POST['course']."' where email='".$_POST['email']."'");
-
- $result=mysqli_query($conn,"select * from roles where name='".$_POST['guide']."' ");
-   while($row=mysqli_fetch_assoc($result)){
-       $receiver=$row['email'];
-   }
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -33,9 +16,9 @@ require 'PHPMailer/src/SMTP.php';
     // $sub=$_POST["authsub"];
     // $bod="Name: ".$name."<br>ID: ".$id."<br>E-mail: ".$email."<br>Phone no: ".$phno."<br>Query: ".$query ;
 
-    // $receiver = "";
-    $sub = "Bla bla bla";
-    $body = $_POST['name']." from ".$_POST['course'];
+    $receiver = "";
+    $sub = "";
+    $body = "";
 
     $mail = new PHPMailer(true);
     
@@ -67,20 +50,19 @@ require 'PHPMailer/src/SMTP.php';
         // TCP port to connect to
     
         //Recipients
-        $mail->setFrom('adharshkrish@pec.edu', 'reviewsystem@noreply');
-        $mail->addAddress($receiver, $_POST['guide']);     // Add a recipient
+        $mail->setFrom('purushottambanerjee@pec.edu', 'contactus@noreply');
+        $mail->addAddress($amail, 'reciever');     // Add a recipient
     // $mail->addAddress('optional name');               // Name is optional
-        // $mail->addReplyTo('info@example.com', 'Information');
-        // $mail->addCC($email);
-        // $mail->addBCC('bcc@example.com');
+        $mail->addReplyTo('info@example.com', 'Information');
+        $mail->addCC($email);
+        $mail->addBCC('bcc@example.com');
     // echo "<script>";
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = $sub;
-        $mail->Body    = $body;
-        $mail->AltBody = $body;
-        $mail->send();
-        // if()
+        $mail->Body    = $bod;
+        $mail->AltBody = $bod;
+        // if($mail->send())
         // {
         // echo "alert('Complaint has been registered')";
 
@@ -96,3 +78,5 @@ require 'PHPMailer/src/SMTP.php';
         // echo "alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}')";
         die();
     }
+    // echo "</script>";
+?>
