@@ -31,7 +31,7 @@
                 if($_SESSION['role']!='admin.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                  $conn=mysqli_connect("localhost","root","","review");
+                  $conn=mysqli_connect("localhost","root","root","review");
  ?>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->

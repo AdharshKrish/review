@@ -1,5 +1,5 @@
 <?php
- $conn=mysqli_connect("localhost","root","","review");
+ $conn=mysqli_connect("localhost","root","root","review");
  if(isset($_POST['datetime']))
 {
     date_default_timezone_set('Asia/Kolkata');
@@ -8,14 +8,29 @@
 $regno=strtoupper($_POST['regno']);
  $result=mysqli_query($conn,"insert into consent values(null,'".$_POST['name']."','".$regno."','".$_POST['email']."','".$_POST['course']."','".$_POST['guide']."',0,'".$date_clicked."')");
  $result=mysqli_query($conn,"insert into timeanddate values('".$regno."','".$date_clicked."','".$_POST['guide']."',null,null,null,null,null,null)");
-//  header('location:login.php');
  $result=mysqli_query($conn,"update roles set name='".$_POST['name']."', regno='".$regno."', course='".$_POST['course']."' where email='".$_POST['email']."'");
 
  $result=mysqli_query($conn,"select * from roles where name='".$_POST['guide']."' ");
    while($row=mysqli_fetch_assoc($result)){
        $receiver=$row['email'];
    }
+$n=10; 
+function getName($n) { 
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
+	$randomString = ''; 
 
+	for ($i = 0; $i < $n; $i++) { 
+		$index = rand(0, strlen($characters) - 1); 
+		$randomString .= $characters[$index]; 
+	} 
+
+	return $randomString; 
+} 
+
+$code=getName($n); 
+$approve="<a href='http://localhost/projects/review-1/guide_response_mail.php?code=$code&response=1'>Approve</a>";
+$reject="<a href='http://localhost/projects/review-1/guide_response_mail.php?code=$code&response=0'>Reject</a>";
+$result=mysqli_query($conn,"insert into mail_response values('$code','".$_POST['guide']."','$regno' )");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -35,7 +50,7 @@ require 'PHPMailer/src/SMTP.php';
 
     // $receiver = "";
     $sub = "Bla bla bla";
-    $body = $_POST['name']." from ".$_POST['course'];
+    $body = $_POST['name']." from ".$_POST['course'].$approve." / ".$reject;
 
     $mail = new PHPMailer(true);
     
@@ -96,3 +111,4 @@ require 'PHPMailer/src/SMTP.php';
         // echo "alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}')";
         die();
     }
+  header('location:login.php');
