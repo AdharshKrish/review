@@ -15,11 +15,13 @@ if($row=mysqli_fetch_assoc($result))
     {
         $result=mysqli_query($conn,"update timeanddate set guide_reject='".$date_clicked."', guide_msg='', where regno='".$row['student']."' and guide='".$row['guide']."'");
         $result=mysqli_query($conn,"insert into notify values(null,'".$email['email']."','$date_clicked','',0,'".$row['guide']."')");   
-        $result=mysqli_query($conn,"delete from consent where guide='".$row['guide']."' and regno='".$row['student']."'");   
+        $result=mysqli_query($conn,"delete from consent where guide='".$row['guide']."' and regno='".$row['student']."'");  
+        echo '<center><h1>Consent has been rejected</h1></center>'; 
     }
    else{
         $result=mysqli_query($conn,"update timeanddate set guide_approve='".$date_clicked."' where regno='".$row['student']."' and guide='".$row['guide']."'");
         $result=mysqli_query($conn,"update consent set guide_approval=1 where guide='".$row['guide']."' and regno='".$row['student']."'");   
+        echo '<center><h1>Consent has been Accepted</h1></center>'; 
     }
 }
 ?>

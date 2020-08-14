@@ -49,8 +49,14 @@ require 'PHPMailer/src/SMTP.php';
     // $bod="Name: ".$name."<br>ID: ".$id."<br>E-mail: ".$email."<br>Phone no: ".$phno."<br>Query: ".$query ;
 
     // $receiver = "";
-    $sub = "Bla bla bla";
-    $body = $_POST['name']." from ".$_POST['course'].$approve." / ".$reject;
+    $sub = "M.Tech Project Guide Consent Form";
+    $body = "Respected Professor,<br>
+    I  ".$_POST['name']." studying ".$_POST['course']." having registration number $regno  request to guide me  for the Project work for  academic year 2020-2021.<br>
+    
+    Thanks & Regards<br>".$_POST['name']."<br>".$approve." / ".$reject;
+    
+    
+    
 
     $mail = new PHPMailer(true);
     
