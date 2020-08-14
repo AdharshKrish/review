@@ -76,12 +76,12 @@
                 session_start();
                 if(!isset($_SESSION['email'] )){
                 
-                    header('location:index1.html');
+                    header('location:index.html');
                 }
                 if($_SESSION['role']!='student.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","root","root","review");
+                $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
                 // echo $_SESSION['email'];//="adharshkrish@outlook.com";
                 $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
@@ -144,7 +144,7 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white" onclick="none()">None </a></li>
-                                <!-- <li><a href="index1.html">Analytics </a></li> -->
+                                <!-- <li><a href="index.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         
@@ -203,7 +203,7 @@
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","root","review");
+                $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {

@@ -11,7 +11,7 @@
     <?php
         session_start();
         session_destroy();
-        header('location:index1.html')
+        header('location:index.html')
     ?>
     <!-- <script>
         // var auth2 = gapi.auth2.getAuthInstance();
@@ -22,7 +22,7 @@
         //     // document.getElementById("name").innerHTML = "";
         //     // document.getElementById("email").innerHTML = "";
         // });
-        window.location.href='index1.html';
+        window.location.href='index.html';
     </script> -->
 </body>
 </html>

@@ -26,12 +26,12 @@
 <?php 
                 session_start();
                 if(!isset($_SESSION['email'] ) ){
-                    header('location:index1.html');
+                    header('location:index.html');
                 }
                 if($_SESSION['role']!='admin.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                  $conn=mysqli_connect("localhost","root","root","review");
+                  $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
  ?>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
@@ -154,7 +154,7 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white;" onclick="students()">Guides-Students </a></li>
-                                <!-- <li><a href="index1.html">Analytics </a></li> -->
+                                <!-- <li><a href="index.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         

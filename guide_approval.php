@@ -20,12 +20,12 @@
     <?php
     session_start();
     if(!isset($_SESSION['email'] ) ){
-        header('location:index1.html');
+        header('location:index.html');
     }
     if($_SESSION['role']!='guide_approval.php' ){
         header('location:'.$_SESSION['role']);
     }
-     $conn=mysqli_connect("localhost","root","root","review");
+     $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
      
      $result=mysqli_query($conn,"select * from role where email='".$_SESSION['email']."'");
      while($row=mysqli_fetch_assoc($result))
@@ -69,7 +69,7 @@
        
         
             // $_SESSION['email']="lpandian72@pec.edu";
-            // $conn=mysqli_connect("localhost","root","root","review");
+            // $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
             $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=0");
             while($row=mysqli_fetch_assoc($result))
             {
@@ -96,7 +96,7 @@
             
         </th>
         <?php
-            // $conn=mysqli_connect("localhost","root","root","review");
+            // $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
             $result=mysqli_query($conn,"select * from consent where guide='".$_SESSION['name']."' and guide_approval=1");
             while($row=mysqli_fetch_assoc($result))
             {
