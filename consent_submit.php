@@ -1,5 +1,5 @@
 <?php
- $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
+ $conn=mysqli_connect("localhost","root","","review");
  if(isset($_POST['datetime']))
 {
     date_default_timezone_set('Asia/Kolkata');
@@ -8,9 +8,9 @@
 $regno=strtoupper($_POST['regno']);
  $result=mysqli_query($conn,"insert into consent values(null,'".$_POST['name']."','".$regno."','".$_POST['email']."','".$_POST['course']."','".$_POST['guide']."',0,'".$date_clicked."')");
  $result=mysqli_query($conn,"insert into timeanddate values('".$regno."','".$date_clicked."','".$_POST['guide']."',null,null,null,null,null,null)");
- $result=mysqli_query($conn,"update roles set name='".$_POST['name']."', regno='".$regno."', course='".$_POST['course']."' where email='".$_POST['email']."'");
+ $result=mysqli_query($conn,"update roles set name='".$_POST['name']."', regno='".$regno."', course='".$_POST['course']."' where email='".$_POST['email']."' and role='student'");
 
- $result=mysqli_query($conn,"select * from roles where name='".$_POST['guide']."' ");
+ $result=mysqli_query($conn,"select * from roles where name='".$_POST['guide']."' and role='guide'");
    while($row=mysqli_fetch_assoc($result)){
        $receiver=$row['email'];
    }
@@ -28,8 +28,8 @@ function getName($n) {
 } 
 
 $code=getName($n); 
-$approve="<a href='http://localhost/projects/review-1/guide_response_mail.php?code=$code&response=1'>Approve</a>";
-$reject="<a href='http://localhost/projects/review-1/guide_response_mail.php?code=$code&response=0'>Reject</a>";
+$approve="<a href='http://cse.pec.edu/prs/guide_response_mail.php?code=$code&response=1'>Approve</a>";
+$reject="<a href='http://cse.pec.edu/prs/guide_response_mail.php?code=$code&response=0'>Reject</a>";
 $result=mysqli_query($conn,"insert into mail_response values('$code','".$_POST['guide']."','$regno' )");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -49,8 +49,14 @@ require 'PHPMailer/src/SMTP.php';
     // $bod="Name: ".$name."<br>ID: ".$id."<br>E-mail: ".$email."<br>Phone no: ".$phno."<br>Query: ".$query ;
 
     // $receiver = "";
-    $sub = "Bla bla bla";
-    $body = $_POST['name']." from ".$_POST['course'].$approve." / ".$reject;
+    $sub = "M.Tech Project Guide Consent Form";
+    $body = "Respected Professor,<br>
+    I  ".$_POST['name']." studying ".$_POST['course']." having registration number $regno  request to guide me  for the Project work for  academic year 2020-2021.<br>
+    
+    Thanks & Regards<br>".$_POST['name']."<br>".$approve." / ".$reject;
+    
+    
+    
 
     $mail = new PHPMailer(true);
     
@@ -94,7 +100,7 @@ require 'PHPMailer/src/SMTP.php';
         $mail->Subject = $sub;
         $mail->Body    = $body;
         $mail->AltBody = $body;
-        $mail->send();
+        echo $mail->send();
         // if()
         // {
         // echo "alert('Complaint has been registered')";

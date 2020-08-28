@@ -11,18 +11,13 @@
     <?php
         session_start();
         session_destroy();
-        header('location:index.html')
+        header('location:index.php')
     ?>
     <!-- <script>
-        // var auth2 = gapi.auth2.getAuthInstance();
-        // auth2.signOut().then(function () {
-        //     console.log('User signed out.');
-        //     // document.getElementById("status").innerHTML = a + " signed out.";
-        //     // document.getElementById("ID").innerHTML = "";
-        //     // document.getElementById("name").innerHTML = "";
-        //     // document.getElementById("email").innerHTML = "";
-        // });
-        window.location.href='index.html';
+        window.onbeforeunload = function(e){
+            gapi.auth2.getAuthInstance().signOut();
+        };
+        window.location.href='index.php';
     </script> -->
 </body>
 </html>

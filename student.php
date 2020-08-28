@@ -33,7 +33,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <!-- Logo -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon -->
                         <b><img style="width:20px" src="img/logo.png" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
@@ -76,12 +76,12 @@
                 session_start();
                 if(!isset($_SESSION['email'] )){
                 
-                    header('location:index.html');
+                    header('location:index.php');
                 }
                 if($_SESSION['role']!='student.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
+                $conn=mysqli_connect("localhost","root","","review");
                 // echo $_SESSION['email'];//="adharshkrish@outlook.com";
                 $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
@@ -144,7 +144,6 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white" onclick="none()">None </a></li>
-                                <!-- <li><a href="index.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         
@@ -158,12 +157,12 @@
                                 <li><a href="form-dropzone.html">Dropzone</a></li> -->
                             </ul>
                         </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                        <!-- <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white" href="#">Basic Tables</a></li>
                                 <li><a style="color:white" href="#">Data Tables</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                        
                     </ul>
                 </nav>
@@ -203,7 +202,7 @@
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
+                $conn=mysqli_connect("localhost","root","","review");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {

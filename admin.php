@@ -26,12 +26,12 @@
 <?php 
                 session_start();
                 if(!isset($_SESSION['email'] ) ){
-                    header('location:index.html');
+                    header('location:index.php');
                 }
                 if($_SESSION['role']!='admin.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                  $conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
+                  $conn=mysqli_connect("localhost","root","","review");
  ?>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
@@ -46,7 +46,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <!-- Logo -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon -->
                         <b><img style="width:30px" src="img/logo.png" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
@@ -154,7 +154,6 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white;" onclick="students()">Guides-Students </a></li>
-                                <!-- <li><a href="index.html">Analytics </a></li> -->
                             </ul>
                         </li>
                         
@@ -168,7 +167,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a  style="color:white;" onclick="pending()" >Pending Requests</a></li>
                                 <li><a  style="color:white;" onclick="accepted()">Accepted Requests</a></li>
-                                <li><a  style="color:white;" onclick="log()">Consent Submission Log</a></li>
+                                <li><a  style="color:white;" onclick="log()">Submission Log</a></li>
                             </ul>
                         </li>
                        

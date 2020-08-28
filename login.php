@@ -39,17 +39,18 @@ if(isset($_POST['many'])){
 
 }
 
- $email = $_POST['login'];
+//  $email = $_POST['login'];
 if(isset($_SESSION['role'])){
     header('location:'.$_SESSION['role']);
     exit();
 
 }
 
-$_SESSION['email'] = $email;
-$_SESSION['pic'] = $_POST['pic'];
-$conn=mysqli_connect("localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview");
-$result=mysqli_query($conn,"select * from roles where email='$email'");   
+// echo $_SESSION['email'];
+// $_SESSION['pic'] = $_POST['pic'];
+// "localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview"
+$conn=mysqli_connect("localhost","root","","review");
+$result=mysqli_query($conn,"select * from roles where email='".$_SESSION['email']."'");   
 $i=0;
 $roles=[];
 while($row=mysqli_fetch_assoc($result))
@@ -74,7 +75,15 @@ else if($i==1){
 }
 else{
     session_destroy();   
-    header('location:index.html');
+    // header('location:index.php');
+    // echo '
+    // <script>
+    //     window.onbeforeunload = function(e){
+    //         gapi.auth2.getAuthInstance().signOut();
+    //     };
+    //     // window.location.href="index.php";
+    // </script>';
+    echo '<h1 align="center">Invalid user</h1>';
 
 
  }?>
