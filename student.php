@@ -19,7 +19,17 @@
     <link href="css/mystyle.css" rel="stylesheet">
 
 </head>
-
+<style>
+    #topic-form {
+  width: 50%;
+  margin: 0px auto;
+  position: relative;
+  top: 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 30px 20px;
+}
+    </style>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
@@ -46,6 +56,7 @@
                     </a>
                 </div>
                 <!-- End Logo -->
+               
                 <div class="navbar-collapse">
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto mt-md-0">
@@ -53,7 +64,7 @@
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="#"><i style="color:white; font-size:25px;" class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="#"><i style="color:white; font-size:25px;" class="ti-menu"></i></a> </li>
                         <!-- Messages -->
-                        
+             
                         <!-- End Messages -->
                     </ul>
                     <!-- User profile and search -->
@@ -81,7 +92,7 @@
                 if($_SESSION['role']!='student.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","root","","review");
+                $conn=mysqli_connect("localhost","root","1234","review");
                 // echo $_SESSION['email'];//="adharshkrish@outlook.com";
                 $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
@@ -131,6 +142,7 @@
                 </div>
             </nav>
         </div>
+        
         <!-- End header header -->
         <!-- Left Sidebar  -->
         <div class="left-sidebar">
@@ -144,13 +156,15 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white" onclick="none()">None </a></li>
+                            </u>
                             </ul>
                         </li>
                         
-                        
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a style="color:white" onclick="consent()">Consent Form</a></li>
+                            <li><a style="color:white" onclick="consent()">Consent Form</a></li>
+                            <li><a href="#" style="color:white" onclick="fun()" id ="fz">Topic Form</a> </li>
+          
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
                                 <li><a href="form-editor.html">Editor</a></li>
@@ -170,11 +184,14 @@
             </div>
             <!-- End Sidebar scroll-->
         </div>
+        
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
-        <div id="consent">
-        <form action="consent_submit.php" method="post" class="consent-form">
+        
+        <div id="consent" style="display:block">
+        
+        <form action="upload.php" method="post" class="consent-form">
 <h2 align="center" style="color:#121545">STUDENT CONSENT FORM</h2>
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
@@ -202,7 +219,7 @@
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","","review");
+                $conn=mysqli_connect("localhost","root","1234","review");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {
@@ -246,20 +263,135 @@
                 echo $guidedby.' is your guide';
             }
             ?></h6></div>
+    </form>   
+        </div>
+        <br></br>
+        <div class="consent-form" id="project_topic" style="display:none">
+        <form action="consent_submit.php" method="post">
+        
+<h2 align="center" style="color:#121545">PROJECT DETAILS</h2>
+        <div class="form__group field">
+          <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
+          <label class="form__label">PROJECT TOPIC</label>
+        </div> 
+
+        
+        <div class="form__group field" style="display:none" >
+          <input type="text" class="form__field" placeholder="Email ID" name="email" value="<?php echo $_SESSION['email'] ?>"  required />
+          <label  class="form__label">Email ID</label>
+        </div>
+        
+        <div class="form__group field">
+        <form action="consent_submit.php" method="post" enctype="multipart/form-data">
+  Select file to upload:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+</form>
+         <button class="submit" name="datetime" <?php echo $disabled ?>>Submit</button>
+            </div>
+            <div id="response"> <h6 align="center"><?php
+            $result=mysqli_query($conn,"select * from consent where email='".$_SESSION['email']."'");
+            if($row=mysqli_fetch_assoc($result)){
+                if($row['guide_approval']==0){
+                   echo 'Your request has been sent to '.$row['guide'].' for approval';
+                }
+                else if($row['guide_approval']==1){
+                   echo 'Your request has been sent to HOD for approval';
+                    
+                }
+               
+              
+            }
+            if($guidedby!=""){
+                echo $guidedby.' is your guide';
+            }
+            ?></h6></div>
     </form>
         </div>
             </div>
         <!-- End Page wrapper  -->
-    </div>
+    </div> 
     <!-- End Wrapper -->
-
+        
     <script>
         function consent(){
-            document.getElementById('consent').style.display='block';
+            
+            // toggles between the two forms
+           
+            document.getElementById("consent").style.display="block";
+            document.getElementById("project_topic").style.display="none";
         }
+        function project_topic(){
+           
+            // toggles between the two forms
+            document.getElementById("project_topic").style.display="block";
+            document.getElementById("consent").style.display="none";
+            //fun();
+        }
+        
         function none(){
-            document.getElementById('consent').style.display='none';
+            document.getElementById('cj').style.display='none';
         }
+        function fun()
+    {
+       // project_topic();
+        //var MyWindow;
+        $(document).ready(function(){
+     
+     // client id of the project
+ 
+     var clientId = "709166335785-seqiorm4c9rb17oemve81naa2t6eev7v.apps.googleusercontent.com";
+ 
+     // redirect_uri of the project
+ 
+     var redirect_uri = "http://localhost/review/student.php";
+ 
+     // scope of the project
+ 
+     
+     var scope = "https://www.googleapis.com/auth/drive";
+ 
+     // the url to which the user is redirected to
+ 
+     var url = "";
+ 
+     // this is event click listener for the button
+ 
+     $("#fz").click(function(){
+ 
+        // this is the method which will be invoked it takes four parameters
+ 
+        signIn(clientId,redirect_uri,scope,url);
+     
+     });
+ 
+     function signIn(clientId,redirect_uri,scope,url){
+      
+        // the actual url to which the user is redirected to 
+       
+        url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri="+redirect_uri
+        +"&prompt=consent&response_type=code&client_id="+clientId+"&scope="+scope
+        +"&access_type=offline";
+         
+         // pop up
+         MyWindow=window.open(url,'MyWindow','width=600,height=300'); // return false; 
+         project_topic();
+         // To automatcially close pop up after authoization
+         var xd = setInterval(function () {
+            if (MyWindow.location.href.indexOf("/auth/drive") > 0) {
+                clearInterval(xd);
+                //ready to close the window.
+                MyWindow.close();
+            }
+        }, 500);
+       // MyWindow.close();
+        // this line makes the user redirected to the url
+       // window.location = url;
+        //window.location="http://localhost/review/student.php/#project_topic";
+       
+       
+     }
+   });
+    }
     </script>
 
     <!-- All Jquery -->

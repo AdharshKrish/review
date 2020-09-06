@@ -109,6 +109,13 @@
   border-radius: 10px;
   padding: 30px 20px;
 }
+.topic-form h2 {
+  font-family: 'EB Garamond', serif;
+  font-weight: 900;
+}
+
+
+
 
 .student-card {
   margin: 30px auto;
@@ -148,6 +155,9 @@
   .consent-form {
     width: 80%;
 
+  }
+  .project_topic{
+    width: 80%;
   }
 }
 

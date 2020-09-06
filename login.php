@@ -37,10 +37,12 @@ if(isset($_POST['many'])){
     header('location:'.$_SESSION['role']);
     exit();
 
+
 }
 
 //  $email = $_POST['login'];
 if(isset($_SESSION['role'])){
+    
     header('location:'.$_SESSION['role']);
     exit();
 
@@ -49,7 +51,7 @@ if(isset($_SESSION['role'])){
 // echo $_SESSION['email'];
 // $_SESSION['pic'] = $_POST['pic'];
 // "localhost","pecedu_projReview","tvTWL6q6wk","pecedu_projReview"
-$conn=mysqli_connect("localhost","root","","review");
+$conn=mysqli_connect("localhost","root","1234","review");
 $result=mysqli_query($conn,"select * from roles where email='".$_SESSION['email']."'");   
 $i=0;
 $roles=[];

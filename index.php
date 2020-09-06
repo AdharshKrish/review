@@ -70,6 +70,7 @@ canvas {
     <div id="email"></div>
     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
     <div id="status"></div>
+    <!-- try this  -->
     <form action="login.php" method="post" style="display: none;">
         <input type="text" name="pic" id="pic">
         <input type="submit" id="login" name="login" value="login">

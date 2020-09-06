@@ -1436,7 +1436,7 @@ textarea {
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  color: ##121545;
+  color: #121545;
   white-space: nowrap;
 }
 @media (min-width: 768px) {
@@ -2124,9 +2124,9 @@ textarea {
   stroke-linejoin: round;
   stroke-linecap: round;
   stroke-dasharray: 500%;
-  stroke-dasharray: 0 /;
+  stroke-dasharray: 0 ;
   /* fixes IE prob */
-  stroke-dashoffset: 0 /;
+  stroke-dashoffset: 0 ;
   /* fixes IE prob */
   -webkit-animation: am-draw 40s;
   animation: am-draw 40s;
