@@ -1,3 +1,10 @@
+<?php
+session_start();
+//check id project details have been submitted 
+$_SESSION["submitted"] = "no";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,8 +79,11 @@
                                     </li>
                                     <li>
                                         <div class="message-center">
-                                        <?php
-                session_start();
+
+
+                                            <!-- PHP STARTS HERE   -->
+<?php
+                
                 if(!isset($_SESSION['email'] )){
                 
                     header('location:index.php');
@@ -174,7 +184,10 @@
         <!-- Page wrapper  -->
         <div class="page-wrapper">
         <div id="consent">
-        <form action="consent_submit.php" method="post" class="consent-form">
+
+
+        <!-- FORM STARTS HERE  -->
+        <form action="consent_submit.php " method="post" class="consent-form">
 <h2 align="center" style="color:#121545">STUDENT CONSENT FORM</h2>
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
@@ -217,6 +230,7 @@
             <?php
                 $guidedby="";
                 $disabled="";
+                $topic_submitted="";
                 $result=mysqli_query($conn,"select * from approved where email='".$_SESSION['email']."'");
                 if($row=mysqli_fetch_assoc($result)){
                     $disabled="disabled";
@@ -225,8 +239,26 @@
                 $result=mysqli_query($conn,"select * from consent where email='".$_SESSION['email']."'");
                 if($row=mysqli_fetch_assoc($result)){
                     $disabled="disabled";
+
                 }
-            ?>
+                $result=mysqli_query($conn,"select * from project_information where email='".$_SESSION['email']."'");
+                if($row=mysqli_fetch_assoc($result)){
+                    $topic_submitted="yes";}
+
+                
+
+                
+
+                
+                
+                
+                
+                
+                
+                ?>
+
+
+            
         <button class="submit" name="datetime" <?php echo $disabled ?>>Submit</button>
             </div>
             <div id="response"> <h6 align="center"><?php
@@ -243,7 +275,21 @@
               
             }
             if($guidedby!=""){
-                echo $guidedby.' is your guide';
+                
+                echo $guidedby.' is your guide !  <br>';
+
+                if($topic_submitted!='yes'){
+                    echo "Please add your project details<a href='project_topic.php'>HERE</a>";
+
+                }
+                else{
+                    echo "You Have Submitted Your Project Topic Details ";
+                }
+                
+                  
+                
+               
+
             }
             ?></h6></div>
     </form>
@@ -252,6 +298,7 @@
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
+
 
     <script>
         function consent(){

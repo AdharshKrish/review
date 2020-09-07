@@ -5,7 +5,7 @@
     date_default_timezone_set('Asia/Kolkata');
     $date_clicked = date('Y-m-d H:i:s');;
 }
-$regno=strtoupper($_POST['regno']);
+//$regno=strtoupper($_POST['regno']);   intha query example vachikoo ulaganaathan eh
  $result=mysqli_query($conn,"insert into consent values(null,'".$_POST['name']."','".$regno."','".$_POST['email']."','".$_POST['course']."','".$_POST['guide']."',0,'".$date_clicked."')");
  $result=mysqli_query($conn,"insert into timeanddate values('".$regno."','".$date_clicked."','".$_POST['guide']."',null,null,null,null,null,null)");
  $result=mysqli_query($conn,"update roles set name='".$_POST['name']."', regno='".$regno."', course='".$_POST['course']."' where email='".$_POST['email']."' and role='student'");
@@ -28,8 +28,8 @@ function getName($n) {
 } 
 
 $code=getName($n); 
-$approve="<a href='http://cse.pec.edu/prs/guide_response_mail.php?code=$code&response=1'>Approve</a>";
-$reject="<a href='http://cse.pec.edu/prs/guide_response_mail.php?code=$code&response=0'>Reject</a>";
+$approve="<a href='http://localhost/review/guide_response_mail.php?code=$code&response=1'>Approve</a>";
+$reject="<a href='http://localhost/review/guide_response_mail.php?code=$code&response=0'>Reject</a>";
 $result=mysqli_query($conn,"insert into mail_response values('$code','".$_POST['guide']."','$regno' )");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -50,7 +50,7 @@ require 'PHPMailer/src/SMTP.php';
 
     // $receiver = "";
     $sub = "M.Tech Project Guide Consent Form";
-    $body = "Respected Professor,<br>
+    $body = "Respected Professor,<br> 
     I  ".$_POST['name']." studying ".$_POST['course']." having registration number $regno  request to guide me  for the Project work for  academic year 2020-2021.<br>
     
     Thanks & Regards<br>".$_POST['name']."<br>".$approve." / ".$reject;
