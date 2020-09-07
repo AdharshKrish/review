@@ -142,8 +142,8 @@ INSERT INTO `roles` (`sno`, `name`, `regno`, `email`, `course`, `role`) VALUES
 (49, NULL, NULL, 'vanthana230698@pec.edu', '', 'student'),
 (50, NULL, NULL, 'vijayasanthy1597@pec.edu', '', 'student'),
 (51, NULL, NULL, 'vishnuinvenus@pec.edu', '', 'student'),
-(52, NULL, NULL, 'sathiyamurthyk@pec.edu', '', 'admin');
-
+(52, NULL, NULL, 'sathiyamurthyk@pec.edu', '', 'admin'),
+(53, 'cj', NULL, 'cheraujain@pec.edu','','admin');
 -- --------------------------------------------------------
 
 --
