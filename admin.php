@@ -31,7 +31,7 @@
                 if($_SESSION['role']!='admin.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                  $conn=mysqli_connect("localhost","root","1234","review");
+                  $conn=mysqli_connect("localhost","root","root","review");
  ?>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
@@ -154,6 +154,7 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white;" onclick="students()">Guides-Students </a></li>
+                                <li><a style="color:white;" onclick="abstract()">Abstracts </a></li>
                             </ul>
                         </li>
                         
@@ -277,7 +278,7 @@
         <h4 class="card-title">Accepted Students</h4>
         <h6 class="card-subtitle">List of students you approved</h6>
         <div class="table-responsive m-t-40">
-            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                     <th>Name</th>
@@ -301,6 +302,55 @@
            <td><?php echo $row['email']?></td>
            <td><?php echo $row['course']?></td>
            <td><?php echo $row['guide']?></td>
+          
+                    </tr>
+           <?php
+       }
+       ?>
+ 
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>  
+        </div>
+        <div id="abs" style="display:none">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Project Abstracts</h4>
+        <!-- <h6 class="card-subtitle">List of students you approved</h6> -->
+        <div class="table-responsive m-t-40">
+            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th>Student Name</th>
+                        <th>Register Number</th>
+                        <th>Guide</th>
+                        <th>Project Title</th>
+                       <th>Abstract</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+        
+                    <?php
+       $result=mysqli_query($conn,"select * from project_information");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           $result1=mysqli_query($conn,"select * from approved where email='".$row['email']."'");
+           while($row1=mysqli_fetch_assoc($result1)){
+               $namee=$row1['name'];
+               $regnoo=$row1['regno'];
+               $guidee=$row1['guide'];
+           }
+           ?>
+           <tr>
+           <td><?php echo $namee?></td>
+           <td><?php echo $regnoo?></td>
+           <td><?php echo $guidee?></td>
+           <td><?php echo $row['project_title']?></td>
+           <td><a href="<?php echo $row['project_abstract_file']?>"><?php echo $row['project_abstract_file']?></a></td>
           
                     </tr>
            <?php
@@ -390,6 +440,7 @@
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
             document.getElementById('students').style.display='none';
+            document.getElementById('abs').style.display='none';
             document.getElementById('log').style.display='none';
         }
         function accepted(){
@@ -397,18 +448,30 @@
             document.getElementById('accepted').style.display='block';
             document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='none';
+            document.getElementById('abs').style.display='none';
+
         }
         function log(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
             document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='block';
+            document.getElementById('abs').style.display='none';
         }
         function students(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
             document.getElementById('log').style.display='none';
             document.getElementById('students').style.display='block';
+            document.getElementById('abs').style.display='none';
+        }
+        function abstract(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('log').style.display='none';
+            document.getElementById('students').style.display='none';
+            document.getElementById('abs').style.display='block';
+
         }
         function approve(sno,reg,name,email,course,guide){
             if (confirm('Are you sure you want to approve?')) {

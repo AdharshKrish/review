@@ -24,6 +24,7 @@ $_SESSION["submitted"] = "no";
     <link href="css/helper.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/mystyle.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 
 </head>
 <style>
@@ -102,7 +103,7 @@ $_SESSION["submitted"] = "no";
                 if($_SESSION['role']!='student.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","root","1234","review");
+                $conn=mysqli_connect("localhost","root","root","review");
                 // echo $_SESSION['email'];//="adharshkrish@outlook.com";
                 $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
@@ -173,7 +174,7 @@ $_SESSION["submitted"] = "no";
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
                             <li><a style="color:white" onclick="consent()">Consent Form</a></li>
-                            <li><a href="#" style="color:white" onclick="fun()" id ="fz">Topic Form</a> </li>
+                            <li><a href="#" style="color:white" onclick="project_topic()">Topic Form</a> </li>
           
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
@@ -198,18 +199,10 @@ $_SESSION["submitted"] = "no";
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
-<<<<<<< HEAD
-        <div id="consent">
-
-
-        <!-- FORM STARTS HERE  -->
-        <form action="consent_submit.php " method="post" class="consent-form">
-=======
         
         <div id="consent" style="display:block">
         
-        <form action="upload.php" method="post" class="consent-form">
->>>>>>> 5dff10b82647bfb00fdead4d8d36f98eb48a6887
+        <form action="consent_submit.php" method="post" class="consent-form">
 <h2 align="center" style="color:#121545">STUDENT CONSENT FORM</h2>
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
@@ -237,7 +230,7 @@ $_SESSION["submitted"] = "no";
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","1234","review");
+                $conn=mysqli_connect("localhost","root","root","review");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {
@@ -267,16 +260,6 @@ $_SESSION["submitted"] = "no";
                 if($row=mysqli_fetch_assoc($result)){
                     $topic_submitted="yes";}
 
-                
-
-                
-
-                
-                
-                
-                
-                
-                
                 ?>
 
 
@@ -307,68 +290,54 @@ $_SESSION["submitted"] = "no";
                 else{
                     echo "You Have Submitted Your Project Topic Details ";
                 }
-                
-                  
-                
-               
-
+              
             }
             ?></h6></div>
     </form>   
         </div>
         <br></br>
         <div class="consent-form" id="project_topic" style="display:none">
-        <form action="consent_submit.php" method="post">
-        
+        <form  action=" https://script.google.com/a/pec.edu/macros/s/AKfycbxewRpygSFUT65FT5bPTvz_UduI-mRsxEx-3ZeoYzYUR-AHzmSg/exec"method="post">
+            <div id="data"></div>
 <h2 align="center" style="color:#121545">PROJECT DETAILS</h2>
         <div class="form__group field">
-          <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
+          <input type="text" class="form__field" placeholder="Student Name" name="pname"  required />
           <label class="form__label">PROJECT TOPIC</label>
         </div> 
 
         
-        <div class="form__group field" style="display:none" >
-          <input type="text" class="form__field" placeholder="Email ID" name="email" value="<?php echo $_SESSION['email'] ?>"  required />
-          <label  class="form__label">Email ID</label>
-        </div>
+        
         
         <div class="form__group field">
-        <form action="consent_submit.php" method="post" enctype="multipart/form-data">
+        
   Select file to upload:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-</form>
-         <button class="submit" name="datetime" <?php echo $disabled ?>>Submit</button>
+  <input type="file" name="file" id="uploadfile">
+
+         <button class="submit"   name="datetime" <?php echo $disabled ?>>Submit</button>
             </div>
-            <div id="response"> <h6 align="center"><?php
-            $result=mysqli_query($conn,"select * from consent where email='".$_SESSION['email']."'");
-            if($row=mysqli_fetch_assoc($result)){
-                if($row['guide_approval']==0){
-                   echo 'Your request has been sent to '.$row['guide'].' for approval';
-                }
-                else if($row['guide_approval']==1){
-                   echo 'Your request has been sent to HOD for approval';
-                    
-                }
-               
-              
-            }
-            if($guidedby!=""){
-                echo $guidedby.' is your guide';
-            }
-            ?></h6></div>
+            
     </form>
         </div>
             </div>
         <!-- End Page wrapper  -->
     </div> 
     <!-- End Wrapper -->
-<<<<<<< HEAD
-
-
-=======
         
->>>>>>> 5dff10b82647bfb00fdead4d8d36f98eb48a6887
     <script>
+    $('#uploadfile').on("change", function() {
+        var file = this.files[0];
+        var fr = new FileReader();
+        fr.fileName = file.name;
+        fr.onload = function(e) {
+            e.target.result
+            html = '<input type="hidden" name="data" value="' + e.target.result.replace(/^.*,/, '') + '" >';
+            html += '<input type="hidden" name="mimetype" value="' + e.target.result.match(/^.*(?=;)/)[0] + '" >';
+            html += '<input type="hidden" name="filename" value="' + e.target.fileName + '" >';
+            html += '<input type="hidden" name="email" value="<?php echo $_SESSION['email'] ?>" >';
+            $("#data").empty().append(html);
+        }
+        fr.readAsDataURL(file);
+    });
         function consent(){
             
             // toggles between the two forms
@@ -381,7 +350,7 @@ $_SESSION["submitted"] = "no";
             // toggles between the two forms
             document.getElementById("project_topic").style.display="block";
             document.getElementById("consent").style.display="none";
-            //fun();
+            fun();
         }
         
         function none(){

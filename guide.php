@@ -84,7 +84,7 @@
                 if($_SESSION['role']!='guide.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                 $conn=mysqli_connect("localhost","root","1234","review");
+                 $conn=mysqli_connect("localhost","root","root","review");
                  
                  $result=mysqli_query($conn,"select * from roles where email='".$_SESSION['email']."' and role='guide'");
                  while($row=mysqli_fetch_assoc($result))
@@ -154,6 +154,7 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style= "color:white ; font-size:25px"class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a  style="color:white;" onclick="mystudents()">My Students</a></li>
+                                <li><a  style="color:white;" onclick="abstract()">Abstract</a></li>
                             </ul>
                         </li>
                         
@@ -183,6 +184,7 @@
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
+        
         <div id="pending" style="display:none">
         <div class="card">
     <div class="card-body">
@@ -227,6 +229,44 @@
     </div>
 </div>
     </div>
+    <div id="abs" style="display:none">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Project Abstract</h4>
+        <!-- <h6 class="card-subtitle">List of students you approved</h6> -->
+        <div class="table-responsive m-t-40">
+            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Project Title</th>
+                       <th>Abstract</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+        
+                    <?php
+       $result=mysqli_query($conn,"select * from project_information where email=(select email from approved where guide='".$_SESSION['name']."')");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           
+           ?>
+           <tr>
+           <td><?php echo $row['project_title']?></td>
+           <td><a href="<?php echo $row['project_abstract_file']?>"><?php echo $row['project_abstract_file']?></a></td>
+          
+                    </tr>
+           <?php
+       }
+       ?>
+ 
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>  
+        </div>
     <div id="accepted" style="display:none">
 <div class="card">
     <div class="card-body">
@@ -298,11 +338,19 @@
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
             document.getElementById('mystudents').style.display='none';
+            document.getElementById('abs').style.display='none';
         }
         function accepted(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='block';
             document.getElementById('mystudents').style.display='none';
+            document.getElementById('abs').style.display='none';
+        }
+        function abstract(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('mystudents').style.display='none';
+            document.getElementById('abs').style.display='block';
         }
         function approve(sno,regno,guide){
             if (confirm('Are you sure you want to approve?')) {
@@ -355,6 +403,7 @@
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
             document.getElementById('mystudents').style.display='block';
+            document.getElementById('abs').style.display='none';
         }
     </script>
 

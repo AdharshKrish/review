@@ -1,5 +1,5 @@
 <?php
- $conn=mysqli_connect("localhost","root","1234","review");
+ $conn=mysqli_connect("localhost","root","root","review");
  if(isset($_POST['datetime']))
 {
     date_default_timezone_set('Asia/Kolkata');
@@ -51,13 +51,9 @@ require 'PHPMailer/src/SMTP.php';
     // $receiver = "";
     
     $sub = "M.Tech Project Guide Consent Form";
-<<<<<<< HEAD
-    $body = "Respected Professor,<br> 
-=======
     //$sub = "Hack Test";
     
     $body = "Respected Professor,<br>
->>>>>>> 5dff10b82647bfb00fdead4d8d36f98eb48a6887
     I  ".$_POST['name']." studying ".$_POST['course']." having registration number $regno  request to guide me  for the Project work for  academic year 2020-2021.<br>
     
     Thanks & Regards<br>".$_POST['name']."<br>".$approve." / ".$reject;

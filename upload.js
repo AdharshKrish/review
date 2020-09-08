@@ -67,7 +67,7 @@ $(document).ready(function(){
                 request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken"));
                 
             },
-            url: "https://www.googleapis.com/upload/drive/v2/files",
+            url: "https://www.googleapis.com/upload/drive/v4/files",
             data:{
                 uploadType:"media"
             },
