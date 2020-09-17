@@ -4,7 +4,7 @@ if(!isset($_SESSION['email'])){
 header("location:student.php");
     die();
 }
- $conn=mysqli_connect("localhost","root","root","review");
+ $conn=mysqli_connect("localhost","root","1234","review");
 // if(!isset($_GET['url']))
  $result=mysqli_query($conn,"insert into project_information values(null,'".$_GET['email']."','".$_GET['pname']."','".$_GET['url']."')");
 // else

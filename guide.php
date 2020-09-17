@@ -77,6 +77,7 @@
                                     <li>
                                         <div class="message-center">
                                         <?php
+									
                 session_start();
                 if(!isset($_SESSION['email'] ) ){
                     header('location:login.php');
@@ -84,14 +85,18 @@
                 if($_SESSION['role']!='guide.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                 $conn=mysqli_connect("localhost","root","root","review");
-                 
+                 $conn=mysqli_connect("localhost","root","1234","review");
+				                
                  $result=mysqli_query($conn,"select * from roles where email='".$_SESSION['email']."' and role='guide'");
                  while($row=mysqli_fetch_assoc($result))
                  {
                      $_SESSION['name']=$row['name'];
                  }
-                $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['name']."' order by time desc");
+				 $result1=mysqli_query($conn,"select * from approved where guide='".$_SESSION['name']."'");
+                while($row=mysqli_fetch_assoc($result1))
+                 {
+                     $_SESSION['name1']=$row['name'];
+                 }
                 while($row=mysqli_fetch_assoc($result))
                 {
                     $time=$row['time'];
@@ -114,6 +119,7 @@
                             </a>';
                       
                 }
+				           
                                 
                 ?>
                                         </div>
@@ -154,7 +160,6 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style= "color:white ; font-size:25px"class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a  style="color:white;" onclick="mystudents()">My Students</a></li>
-                                <li><a  style="color:white;" onclick="abstract()">Abstract</a></li>
                             </ul>
                         </li>
                         
@@ -174,7 +179,12 @@
                                 <li><a style="color:white;" onclick="accepted()">Accepted Requests</a></li>
                             </ul>
                         </li>
-                       
+						<li> <a class="has-arrow  " href="#" aria-expanded="false"><i style= "color:white ; font-size:25px" class="fa fa-table"></i><span class="hide-menu">Progress</span></a>
+                            <ul aria-expanded="false" class="collapse">
+							<li><a style="color:white;" onclick="progress()">Progress approval</a></li>
+                       <li><a style="color:white;" onclick="progressconsole()">Progress of the project</a></li>
+					   </ul>
+					   </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -184,7 +194,6 @@
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
-        
         <div id="pending" style="display:none">
         <div class="card">
     <div class="card-body">
@@ -229,44 +238,6 @@
     </div>
 </div>
     </div>
-    <div id="abs" style="display:none">
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Project Abstract</h4>
-        <!-- <h6 class="card-subtitle">List of students you approved</h6> -->
-        <div class="table-responsive m-t-40">
-            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Project Title</th>
-                       <th>Abstract</th>
-                    </tr>
-                </thead>
-            
-                <tbody>
-        
-                    <?php
-       $result=mysqli_query($conn,"select * from project_information where email=(select email from approved where guide='".$_SESSION['name']."')");
-       while($row=mysqli_fetch_assoc($result))
-       {
-           
-           ?>
-           <tr>
-           <td><?php echo $row['project_title']?></td>
-           <td><a href="<?php echo $row['project_abstract_file']?>"><?php echo $row['project_abstract_file']?></a></td>
-          
-                    </tr>
-           <?php
-       }
-       ?>
- 
-                
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>  
-        </div>
     <div id="accepted" style="display:none">
 <div class="card">
     <div class="card-body">
@@ -310,6 +281,90 @@
     </div>
 </div>  
         </div>
+		<div id="progress" style="display:none">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title"><center>Progress Approval</center></h4>
+        <h6 class="card-subtitle">Name of the student:<?php echo $_SESSION['name1']?></h6>
+        <div class="table-responsive m-t-40">
+            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th>SI.NO</th>
+                        <th>Project Activity</th>
+                        <th>Description</th>
+                        <th>Date of Completion</th>
+						<th>Status</th>
+                      
+                    </tr>
+                </thead>
+           
+                <tbody>
+				<?php
+       $result=mysqli_query($conn,"select * from project_progress where guide='".$_SESSION['name']."' and guide_approval=0");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           ?>
+           <tr>
+            <td><?php echo $row['sno']?></td>
+            <td><?php echo $row['progress_activity_title']?></td>
+            <td><?php echo $row['progress_description']?></td>
+            <td><?php echo $row['time']?></td>
+            <td>
+			
+                    <button  style=color:green onclick="accept('<?php echo $row['sno']?>','<?php echo $row['progress_activity_title']?>','<?php echo $row['progress_description']?>','<?php echo $row['guide']?>')">Approve</button>
+                    <button  name ="reject1" style=color:red onclick="reject1('<?php echo $row['sno']?>','<?php echo $row['progress_activity_title']?>','<?php echo $row['progress_description']?>','<?php echo $row['guide']?>')">Reject</button>
+            </td>
+            </tr>
+           <?php
+       }
+       ?>
+				</tbody>
+            </table>
+        </div>
+    </div>
+</div>  
+</div>
+<div id="progressconsole" style="display:none">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title"><center>Progress of the project console</center></h4>
+        <h6 class="card-subtitle">Name of the student:<?php echo $_SESSION['name1']?></h6>
+        <div class="table-responsive m-t-40">
+            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th>SI.NO</th>
+                        <th>Project Activity</th>
+                        <th>Description</th>
+                        <th>Date of Completion</th>
+						<th>Status</th>
+                      
+                    </tr>
+                </thead>
+           
+                <tbody>
+				<?php
+       $result=mysqli_query($conn,"select * from project_progress where guide='".$_SESSION['name']."' and guide_approval=1");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           ?>
+           <tr>
+            <td><?php echo $row['sno']?></td>
+            <td><?php echo $row['progress_activity_title']?></td>
+            <td><?php echo $row['progress_description']?></td>
+            <td><?php echo $row['time']?></td>
+			<td>Completed<td>
+            </tr>
+           <?php
+       }
+       ?>
+				</tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
        <center> <div   id="mystudents">
             <div class="row ">
              <div  class="student-card col-md-6 ">
@@ -338,19 +393,30 @@
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
             document.getElementById('mystudents').style.display='none';
-            document.getElementById('abs').style.display='none';
+			document.getElementById('progress').style.display='none';
+			document.getElementById('progressconsole').style.display='none';
+			
         }
         function accepted(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='block';
             document.getElementById('mystudents').style.display='none';
-            document.getElementById('abs').style.display='none';
+			document.getElementById('progress').style.display='none';
+			document.getElementById('progressconsole').style.display='none';
         }
-        function abstract(){
+		function progress(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
             document.getElementById('mystudents').style.display='none';
-            document.getElementById('abs').style.display='block';
+			document.getElementById('progress').style.display='block';
+			document.getElementById('progressconsole').style.display='none';
+        }
+		function progressconsole(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('mystudents').style.display='none';
+			document.getElementById('progress').style.display='none';
+			document.getElementById('progressconsole').style.display='block';
         }
         function approve(sno,regno,guide){
             if (confirm('Are you sure you want to approve?')) {
@@ -399,11 +465,60 @@
             // Do nothing!
             }
         }
+		function accept(sno,progress_activity_title,progress_description,guide){
+            if (confirm('Are you sure you want to approve?')) {
+                // Save it!
+                $.ajax({
+                    type: "POST",
+                    url: "progress_approve_db.php",
+                    data: {
+                        sno:sno,
+                        progress_activity_title:progress_activity_title,
+						progress_description:progress_description,
+						guide:guide
+                        
+                    },
+                    success: function (blabla) {
+                        console.log(blabla)
+                        alert('The progress of the project has been approved and sent to HOD')
+                        window.location.reload()
+                    }
+                });
+                
+            } else {
+            // Do nothing!
+            }
+        }
+        function reject1(sno,progress_activity_title,progress_description,guide){
+            let message;
+            if (message=prompt('Please mention the reason for rejecting')) {
+                // Save it!
+                $.ajax({
+                    type: "POST",
+                    url: "progress_approve_db.php",
+                    data: {
+                        reject:true,
+                        sno:sno,
+                        progress_activity_title:progress_activity_title,
+						progress_description:progress_description,
+                        message:message,
+						guide:guide
+                    },
+                    success: function (blabla) {
+                        console.log(blabla)
+						alert('The progress message is taken successfully')
+                        window.location.reload()
+                    }
+                });
+                
+            } else {
+            // Do nothing!
+            }
+		}
         function mystudents(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
             document.getElementById('mystudents').style.display='block';
-            document.getElementById('abs').style.display='none';
         }
     </script>
 

@@ -1,5 +1,5 @@
 <?php
-$conn=mysqli_connect("localhost","root","root","review");
+$conn=mysqli_connect("localhost","root","1234","review");
 // $result=mysqli_query($conn,"insert into roles value(null,null,null,'adharsh28600@gmail.com',null,'student')");
 $result=mysqli_query($conn,"select * from roles");
 while($row=mysqli_fetch_assoc($result))

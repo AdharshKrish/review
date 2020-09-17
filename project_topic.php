@@ -38,7 +38,7 @@
         <select class="form__field"  name="studentname">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled> Your Name </option>
             <?php
-                $conn=mysqli_connect("localhost","root","","review");
+                $conn=mysqli_connect("localhost","root","1234","review");
                 $result=mysqli_query($conn,"select name from approved");
                 while($row=mysqli_fetch_assoc($result))
                 {
@@ -115,7 +115,7 @@ session_start();
 
 
 // Create connection
-$conn=mysqli_connect("localhost","root","","review");
+$conn=mysqli_connect("localhost","root","1234","review");
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);

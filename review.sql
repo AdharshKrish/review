@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 13, 2020 at 03:00 PM
--- Server version: 10.5.0-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Sep 07, 2020 at 05:26 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -36,6 +35,14 @@ CREATE TABLE `approved` (
   `guide` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `approved`
+--
+
+INSERT INTO `approved` (`regno`, `name`, `email`, `course`, `guide`) VALUES
+('1234', 'Student', 'www.pragat7@gmail.com', 'M.Tech(IS)', 'Test Guide '),
+('890', 'Kumar', 'ulagadhoni.25@gmail.com', 'M.Tech(IS)', 'Test Guide ');
+
 -- --------------------------------------------------------
 
 --
@@ -53,6 +60,14 @@ CREATE TABLE `consent` (
   `time` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `consent`
+--
+
+INSERT INTO `consent` (`sno`, `name`, `regno`, `email`, `course`, `guide`, `guide_approval`, `time`) VALUES
+(78, 'Pragadeesh Jinx', '18WU99189', '<br /><b>Notice</b>:  Undefine', 'M.Tech(DCS)', 'Dr.Sarala.R', 0, '2020-09-01 12:41:37'),
+(80, '', '', '', '', '', 0, '');
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +79,14 @@ CREATE TABLE `mail_response` (
   `guide` varchar(30) NOT NULL,
   `student` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mail_response`
+--
+
+INSERT INTO `mail_response` (`code`, `guide`, `student`) VALUES
+('aDkrZv1GlE', 'Test Guide ', '890'),
+('Pr5YPjXT4R', '', '');
 
 -- --------------------------------------------------------
 
@@ -79,6 +102,38 @@ CREATE TABLE `notify` (
   `category` int(11) NOT NULL,
   `about` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notify`
+--
+
+INSERT INTO `notify` (`sno`, `email`, `time`, `message`, `category`, `about`) VALUES
+(77, 'www.pragat7@gmail.com', '2020-09-03 16:11:26', 'Admin Approval Successful', 1, 'Test Guide '),
+(78, 'Test Guide ', '2020-09-03 16:11:26', 'Admin Approval Successful', 1, 'Student'),
+(79, 'ulagadhoni.25@gmail.com', '2020-09-04 12:30:21', 'Admin Approval Successful', 1, 'Test Guide '),
+(80, 'Test Guide ', '2020-09-04 12:30:21', 'Admin Approval Successful', 1, 'Kumar');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_information`
+--
+
+CREATE TABLE `project_information` (
+  `sno` int(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `project_title` varchar(255) NOT NULL,
+  `project_abstract_file` varchar(1000) NOT NULL,
+  `project_guide` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `project_information`
+--
+
+INSERT INTO `project_information` (`sno`, `email`, `student_name`, `project_title`, `project_abstract_file`, `project_guide`) VALUES
+(128, 'www.pragat7@gmail.com', 'Kumar ', 'emailcheck', 'link here', 'Test Guide  ');
 
 -- --------------------------------------------------------
 
@@ -143,7 +198,13 @@ INSERT INTO `roles` (`sno`, `name`, `regno`, `email`, `course`, `role`) VALUES
 (50, NULL, NULL, 'vijayasanthy1597@pec.edu', '', 'student'),
 (51, NULL, NULL, 'vishnuinvenus@pec.edu', '', 'student'),
 (52, NULL, NULL, 'sathiyamurthyk@pec.edu', '', 'admin'),
-(53, 'cj', NULL, 'cheraujain@pec.edu','','admin');
+(53, NULL, NULL, 'www.pragat7@pec.edu', '', 'admin'),
+(54, 'Student', '1234', 'www.pragat7@gmail.com', 'M.Tech(IS)', 'student'),
+(56, 'Test Guide ', NULL, 'www.pragat7@pec.edu', '', 'guide'),
+(57, 'Kumar', '890', 'ulagadhoni.25@gmail.com', 'M.Tech(IS)', 'student'),
+(58, NULL, NULL, 'cheraujain@pec.edu', '', 'student');
+
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +222,17 @@ CREATE TABLE `timeanddate` (
   `admin_reject` varchar(30) DEFAULT NULL,
   `admin_msg` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- Dumping data for table `timeanddate`
+--
+
+INSERT INTO `timeanddate` (`regno`, `consent_time`, `guide`, `guide_approve`, `guide_reject`, `guide_msg`, `admin_approve`, `admin_reject`, `admin_msg`) VALUES
+('', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('18WU99189', '2020-09-01 12:41:37', 'Dr.Sarala.R', NULL, NULL, NULL, NULL, NULL, NULL),
+('1234', '2020-09-03 15:21:41', 'Test Guide ', '2020-09-03 16:10:39', NULL, NULL, '2020-09-03 16:11:26', NULL, NULL),
+('890', '2020-09-04 12:29:26', 'Test Guide ', '2020-09-05 15:13:20', NULL, NULL, '2020-09-04 12:30:21', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -192,6 +264,12 @@ ALTER TABLE `notify`
   ADD PRIMARY KEY (`sno`);
 
 --
+-- Indexes for table `project_information`
+--
+ALTER TABLE `project_information`
+  ADD PRIMARY KEY (`sno`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -211,21 +289,40 @@ ALTER TABLE `timeanddate`
 -- AUTO_INCREMENT for table `consent`
 --
 ALTER TABLE `consent`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `notify`
 --
 ALTER TABLE `notify`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
+-- AUTO_INCREMENT for table `project_information`
+--
+ALTER TABLE `project_information`
+  MODIFY `sno` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE `project_progress`(
+`sno` int(11) NOT NULL,
+`name` varchar(50) NOT NULL,
+`progress_activity_title` varchar(30) NOT NULL,
+`progress_description` varchar(100) NOT NULL,
+`time` varchar(15) NOT NULL,
+`guide` varchar(30) NOT NULL,
+`guide_approval` int(11) NOT NULL,
+`reject_message` varchar(30) NULL
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `project_progress``
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT;

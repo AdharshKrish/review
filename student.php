@@ -103,7 +103,7 @@ $_SESSION["submitted"] = "no";
                 if($_SESSION['role']!='student.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","root","root","review");
+                $conn=mysqli_connect("localhost","root","1234","review");
                 // echo $_SESSION['email'];//="adharshkrish@outlook.com";
                 $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
@@ -175,6 +175,8 @@ $_SESSION["submitted"] = "no";
                             <ul aria-expanded="false" class="collapse">
                             <li><a style="color:white" onclick="consent()">Consent Form</a></li>
                             <li><a href="#" style="color:white" onclick="project_topic()">Topic Form</a> </li>
+                            <li><a style="color:white" onclick="progress()">Progress Form</a></li>
+                           
           
                                 <!-- <li><a href="form-layout.html">Form Layout</a></li>
                                 <li><a href="form-validation.html">Form Validation</a></li>
@@ -199,10 +201,29 @@ $_SESSION["submitted"] = "no";
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
+
+        <!-- PROGRESS FORM -->
+        <div id="progress" style="display:none">
+    <form action="progress_submit.php" method="POST" class="consent-form">
+        <h2 align="center" style="color:#121545">PROGRESS FORM</h2>
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="Project activity" name="progress_activity_title" required />
+            <label class="form__label">Project Activity</label>
+        </div>
+        <div class="form__group field">
+            <textarea name="progress_description" id="" cols="45" rows="10" placeholder="Enter the short description"></textarea>
+        </div>
+        <div class="text-center">
+          <input type="submit" name ="submit_progress" class = "btn btn-danger">
+          
+          </div>
+          </form>
+     </div>
+        <!-- End PROGRESS FORM -->
         
-        <div id="consent" style="display:block">
+        <div id="consent" style="display:block"  class="consent-form">
         
-        <form action="consent_submit.php" method="post" class="consent-form">
+        <form action="consent_submit.php" method="post">
 <h2 align="center" style="color:#121545">STUDENT CONSENT FORM</h2>
         <div class="form__group field">
           <input type="text" class="form__field" placeholder="Student Name" name="name"  required />
@@ -230,7 +251,7 @@ $_SESSION["submitted"] = "no";
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","root","review");
+                $conn=mysqli_connect("localhost","root","1234","review");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {
@@ -259,10 +280,8 @@ $_SESSION["submitted"] = "no";
                 $result=mysqli_query($conn,"select * from project_information where email='".$_SESSION['email']."'");
                 if($row=mysqli_fetch_assoc($result)){
                     $topic_submitted="yes";}
-
+                
                 ?>
-
-
             
         <button class="submit" name="datetime" <?php echo $disabled ?>>Submit</button>
             </div>
@@ -275,9 +294,7 @@ $_SESSION["submitted"] = "no";
                 else if($row['guide_approval']==1){
                    echo 'Your request has been sent to HOD for approval';
                     
-                }
-               
-              
+                }  
             }
             if($guidedby!=""){
                 
@@ -340,17 +357,29 @@ $_SESSION["submitted"] = "no";
     });
         function consent(){
             
-            // toggles between the two forms
+            // toggles between the 3 forms
            
             document.getElementById("consent").style.display="block";
             document.getElementById("project_topic").style.display="none";
+            document.getElementById("progress").style.display="none";
+
         }
         function project_topic(){
            
-            // toggles between the two forms
+            // toggles between the 3 forms
             document.getElementById("project_topic").style.display="block";
             document.getElementById("consent").style.display="none";
+            document.getElementById("progress").style.display="none";
+
             fun();
+        }
+        function progress()
+        {
+            // toggles between the 3 forms
+
+            document.getElementById("progress").style.display="block";
+            document.getElementById("consent").style.display="none";
+            document.getElementById("project_topic").style.display="none";
         }
         
         function none(){

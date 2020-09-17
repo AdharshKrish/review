@@ -1,5 +1,5 @@
 <?php
- $conn=mysqli_connect("localhost","root","root","review");
+ $conn=mysqli_connect("localhost","root","1234","review");
  if(isset($_POST['datetime']))
 {
     date_default_timezone_set('Asia/Kolkata');

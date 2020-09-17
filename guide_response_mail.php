@@ -4,7 +4,7 @@ $code=$_GET['code'];
 $response=$_GET['response'];
 date_default_timezone_set('Asia/Kolkata');
 $date_clicked = date('Y-m-d H:i:s');;
-$conn=mysqli_connect("localhost","root","root","review");
+$conn=mysqli_connect("localhost","root","1234","review");
 $result=mysqli_query($conn,"select * from mail_response where code='$code'");
 if($row=mysqli_fetch_assoc($result))
 {
