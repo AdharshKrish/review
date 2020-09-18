@@ -103,7 +103,7 @@ $_SESSION["submitted"] = "no";
                 if($_SESSION['role']!='student.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                $conn=mysqli_connect("localhost","root","1234","review");
+                $conn=mysqli_connect("localhost","root","root","review");
                 // echo $_SESSION['email'];//="adharshkrish@outlook.com";
                 $result=mysqli_query($conn,"select * from notify where email='".$_SESSION['email']."' order by time desc");
                 while($row=mysqli_fetch_assoc($result))
@@ -251,7 +251,7 @@ $_SESSION["submitted"] = "no";
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","1234","review");
+                $conn=mysqli_connect("localhost","root","root","review");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {

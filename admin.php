@@ -31,7 +31,7 @@
                 if($_SESSION['role']!='admin.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                  $conn=mysqli_connect("localhost","root","1234","review");
+                  $conn=mysqli_connect("localhost","root","root","review");
 				  
  ?>
 <body class="fix-header fix-sidebar">
@@ -328,6 +328,7 @@
                 <thead>
                     <tr>
                     <th>SI.NO</th>
+					<th>Student Name</th>
                         <th>Project Activity</th>
                         <th>Description</th>
                         <th>Date of Completion</th>
@@ -343,6 +344,7 @@
            ?>
            <tr>
             <td><?php echo $row['sno']?></td>
+			<td><?php echo $row['name']?></td>
             <td><?php echo $row['progress_activity_title']?></td>
             <td><?php echo $row['progress_description']?></td>
             <td><?php echo $row['time']?></td>

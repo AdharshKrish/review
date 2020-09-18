@@ -5,12 +5,12 @@ session_start();
 
 if(!$_POST['reject'])
 {
-$conn=mysqli_connect("localhost","root","1234","review");
+$conn=mysqli_connect("localhost","root","root","review");
 $result=mysqli_query($conn,"update project_progress set guide_approval=1 where sno=".$_POST['sno']);
 }
 else 
 {
-	$conn=mysqli_connect("localhost","root","1234","review");
+	$conn=mysqli_connect("localhost","root","root","review");
 	$result=mysqli_query($conn,"update project_progress set reject_message='".$_POST['message']."', guide_approval=-1 where sno=".$_POST['sno']);
 }
 

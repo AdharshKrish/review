@@ -85,7 +85,7 @@
                 if($_SESSION['role']!='guide.php' ){
                     header('location:'.$_SESSION['role']);
                 }
-                 $conn=mysqli_connect("localhost","root","1234","review");
+                 $conn=mysqli_connect("localhost","root","root","review");
 				                
                  $result=mysqli_query($conn,"select * from roles where email='".$_SESSION['email']."' and role='guide'");
                  while($row=mysqli_fetch_assoc($result))
@@ -194,6 +194,26 @@
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
         <div class="page-wrapper">
+		<center>
+        <div   id="mystudents">
+            <div class="row ">
+             <div  class="student-card col-md-6 ">
+             <h2 style="background-color:#121545; margin:-30px -30px 20px -30px; padding:20px; color:#FFF; font-weight:700">My Students</h2>
+             <div class="row ">
+             <?php
+       $result=mysqli_query($conn,"select * from approved where guide='".$_SESSION['name']."'");
+       while($row=mysqli_fetch_assoc($result))
+       {
+            echo '<div style="font-size:20px" class=col-6>'.$row['name'].'</div><div class=col-6>'.$row['regno'].'</div>';
+       }
+              ?>
+              
+             </div>
+    </div>
+        </div>
+    
+            </center>
+    
         <div id="pending" style="display:none">
         <div class="card">
     <div class="card-body">
@@ -285,12 +305,13 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title"><center>Progress Approval</center></h4>
-        <h6 class="card-subtitle">Name of the student:<?php echo $_SESSION['name1']?></h6>
+        
         <div class="table-responsive m-t-40">
             <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                     <th>SI.NO</th>
+					<th>Student Name</th>
                         <th>Project Activity</th>
                         <th>Description</th>
                         <th>Date of Completion</th>
@@ -307,6 +328,7 @@
            ?>
            <tr>
             <td><?php echo $row['sno']?></td>
+			<td><?php echo $row['name']?></td>
             <td><?php echo $row['progress_activity_title']?></td>
             <td><?php echo $row['progress_description']?></td>
             <td><?php echo $row['time']?></td>
@@ -329,12 +351,13 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title"><center>Progress of the project console</center></h4>
-        <h6 class="card-subtitle">Name of the student:<?php echo $_SESSION['name1']?></h6>
+        
         <div class="table-responsive m-t-40">
             <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                     <th>SI.NO</th>
+					<th>Student Name</th>
                         <th>Project Activity</th>
                         <th>Description</th>
                         <th>Date of Completion</th>
@@ -351,6 +374,7 @@
            ?>
            <tr>
             <td><?php echo $row['sno']?></td>
+			<td><?php echo $row['name']?></td>
             <td><?php echo $row['progress_activity_title']?></td>
             <td><?php echo $row['progress_description']?></td>
             <td><?php echo $row['time']?></td>
@@ -364,31 +388,21 @@
         </div>
     </div>
 </div>
-<div>
-       <center> <div   id="mystudents">
-            <div class="row ">
-             <div  class="student-card col-md-6 ">
-             <h2 style="background-color:#121545; margin:-30px -30px 20px -30px; padding:20px; color:#FFF; font-weight:700">My Students</h2>
-             <div class="row ">
-             <?php
-       $result=mysqli_query($conn,"select * from approved where guide='".$_SESSION['name']."'");
-       while($row=mysqli_fetch_assoc($result))
-       {
-            echo '<div style="font-size:20px" class=col-6>'.$row['name'].'</div><div class=col-6>'.$row['regno'].'</div>';
-       }
-              ?>
-              </div>
-             </div>
-    </div>
-        </div>
-    </center>
-    </div>
+</div>
 
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
     
     <script>
+	function mystudents(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('mystudents').style.display='block';
+			document.getElementById('progress').style.display='none';
+			document.getElementById('progressconsole').style.display='none';
+			
+        }
         function pending(){
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
@@ -515,11 +529,7 @@
             // Do nothing!
             }
 		}
-        function mystudents(){
-            document.getElementById('pending').style.display='none';
-            document.getElementById('accepted').style.display='none';
-            document.getElementById('mystudents').style.display='block';
-        }
+        
     </script>
 
     <!-- All Jquery -->
