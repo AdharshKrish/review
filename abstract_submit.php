@@ -6,7 +6,7 @@ header("location:student.php");
 }
  $conn=mysqli_connect("localhost","root","root","review");
 // if(!isset($_GET['url']))
- $result=mysqli_query($conn,"insert into project_information values(null,'".$_GET['email']."','".$_GET['pname']."','".$_GET['url']."')");
+ $result=mysqli_query($conn,"insert into project_information values('".$_GET['email']."','".$_GET['pname']."','".$_GET['domain']."','".$_GET['url']."')");
 // else
 //$result=mysqli_query($conn,"update project_information set project_abstract_file='".$_GET['url']."' where email='".$_GET['email']."'" );
 header("location:student.php");

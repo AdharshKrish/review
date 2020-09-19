@@ -211,7 +211,8 @@ $_SESSION["submitted"] = "no";
             <label class="form__label">Project Activity</label>
         </div>
         <div class="form__group field">
-            <textarea name="progress_description" id="" cols="45" rows="10" placeholder="Enter the short description"></textarea>
+            <textarea class="form__field" placeholder="Description" name="progress_description" id="" cols="45" rows="10" placeholder="Enter the short description"></textarea>
+            <label class="form__label">Description</label>
         </div>
         <div class="text-center">
           <input type="submit" name ="submit_progress" class = "btn btn-danger">
@@ -251,7 +252,7 @@ $_SESSION["submitted"] = "no";
         <select class="form__field"  name="guide">
             <option value="Select" selected="true" style="color:#9b9b9b" disabled>Select your guide</option>
             <?php
-                $conn=mysqli_connect("localhost","root","root","review");
+                // $conn=mysqli_connect("localhost","root","root","review");
                 $result=mysqli_query($conn,"select * from roles where role='guide'");
                 while($row=mysqli_fetch_assoc($result))
                 {
@@ -318,19 +319,33 @@ $_SESSION["submitted"] = "no";
             <div id="data"></div>
 <h2 align="center" style="color:#121545">PROJECT DETAILS</h2>
         <div class="form__group field">
-          <input type="text" class="form__field" placeholder="Student Name" name="pname"  required />
-          <label class="form__label">PROJECT TOPIC</label>
+          <input type="text" class="form__field" placeholder="Student Name" name="domain"  required />
+          <label class="form__label">DOMAIN AREA</label>
         </div> 
 
-        
-        
+        <div class="form__group field">
+          <input type="text" class="form__field" placeholder="Student Name" name="pname"  required />
+          <label class="form__label">PROJECT TITLE</label>
+        </div> 
         
         <div class="form__group field">
         
-  Select file to upload:
+  Select abstract document to upload:
   <input type="file" name="file" id="uploadfile">
 
-         <button class="submit"   name="datetime" <?php echo $disabled ?>>Submit</button>
+         <button class="submit"   name="datetime" <?php echo $topic_submitted ?>>Submit</button>
+         <?php
+         echo '<center>';
+         if($topic_submitted!='disabled'){
+            echo "Please add your project details";
+
+        }
+        else{
+            echo "You Have Submitted Your Project Topic Details ";
+        }
+        echo '</center>';
+      
+         ?>
             </div>
             
     </form>

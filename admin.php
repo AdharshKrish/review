@@ -25,14 +25,16 @@
 </head>
 <?php 
                 session_start();
-                if(!isset($_SESSION['email'] ) ){
+                if($_SESSION['email'] ==null){
                     header('location:index.php');
+                    
+                    die();
                 }
                 if($_SESSION['role']!='admin.php' ){
                     header('location:'.$_SESSION['role']);
+                    die();
                 }
                   $conn=mysqli_connect("localhost","root","root","review");
-				  
  ?>
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
@@ -155,6 +157,8 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i style="color:white; font-size:25px;" class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a style="color:white;" onclick="students()">Guides-Students </a></li>
+                                <li><a style="color:white;" onclick="abstract()">Abstracts </a></li>
+                                <li><a style="color:white;" onclick="progress()">Progress of the project</a></li>
                             </ul>
                         </li>
                         
@@ -171,11 +175,7 @@
                                 <li><a  style="color:white;" onclick="log()">Submission Log</a></li>
                             </ul>
                         </li>
-                       <li> <a class="has-arrow  " href="#" aria-expanded="false"><i style= "color:white ; font-size:25px" class="fa fa-table"></i><span class="hide-menu">Progress</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                       <li><a style="color:white;" onclick="progress()">Progress of the project</a></li>
-					   </ul>
-					   </li>
+                       
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -223,7 +223,7 @@
         <h2 class="card-title">Pending Requests</h2>
         <h3 class="card-subtitle">Approve the requests you prefer</h3>
         <div class="table-responsive m-t-40">
-            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <table  class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                     <th>Name</th>
@@ -282,7 +282,7 @@
         <h4 class="card-title">Accepted Students</h4>
         <h6 class="card-subtitle">List of students you approved</h6>
         <div class="table-responsive m-t-40">
-            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                     <th>Name</th>
@@ -319,12 +319,13 @@
     </div>
 </div>  
         </div>
-		<div id="progress" style="display:none">
+
+<div id="progress" style="display:none">
 <div class="card">
     <div class="card-body">
          <h4 class="card-title"><center>Progress of the project</center></h4>
         <div class="table-responsive m-t-40">
-            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+            <table class="example24 display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                     <th>SI.NO</th>
@@ -358,6 +359,58 @@
         </div>
     </div>
 </div>  
+</div>
+        <div id="abs" style="display:none">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Project Abstracts</h4>
+        <!-- <h6 class="card-subtitle">List of students you approved</h6> -->
+        <div class="table-responsive m-t-40">
+            <table id="example24" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    <th>Student Name</th>
+                        <th>Register Number</th>
+                        <th>Guide</th>
+                        <th>Project Title</th>
+                        <th>Domain</th>
+                       <th>Abstract</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+        
+                    <?php
+       $result=mysqli_query($conn,"select * from project_information");
+       while($row=mysqli_fetch_assoc($result))
+       {
+           $result1=mysqli_query($conn,"select * from approved where email='".$row['email']."'");
+           while($row1=mysqli_fetch_assoc($result1)){
+               $namee=$row1['name'];
+               $regnoo=$row1['regno'];
+               $guidee=$row1['guide'];
+           }
+           ?>
+           <tr>
+           <td><?php echo $namee?></td>
+           <td><?php echo $regnoo?></td>
+           <td><?php echo $guidee?></td>
+           <td><?php echo $row['project_title']?></td>
+           <td><?php echo $row['domain']?></td>
+           <td><a target="_blank" href="<?php echo $row['project_abstract_file']?>">View file</a></td>
+          
+                    </tr>
+           <?php
+       }
+       ?>
+ 
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>  
+        </div>
         <div id="log" style="display:none">
         <div class="card">
     <div class="card-body">
@@ -434,6 +487,7 @@
             document.getElementById('pending').style.display='block';
             document.getElementById('accepted').style.display='none';
             document.getElementById('students').style.display='none';
+            document.getElementById('abs').style.display='none';
             document.getElementById('log').style.display='none';
 			document.getElementById('progress').style.display='none';
         }
@@ -442,13 +496,16 @@
             document.getElementById('accepted').style.display='block';
             document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='none';
+            document.getElementById('abs').style.display='none';
 			document.getElementById('progress').style.display='none';
+
         }
-		function progress(){
+        function progress(){
             document.getElementById('pending').style.display='none';
             document.getElementById('accepted').style.display='none';
             document.getElementById('students').style.display='none';
 			document.getElementById('log').style.display='none';
+			document.getElementById('abs').style.display='none';
 			document.getElementById('progress').style.display='block';
         }
         function log(){
@@ -456,6 +513,7 @@
             document.getElementById('accepted').style.display='none';
             document.getElementById('students').style.display='none';
             document.getElementById('log').style.display='block';
+            document.getElementById('abs').style.display='none';
 			document.getElementById('progress').style.display='none';
         }
         function students(){
@@ -463,7 +521,17 @@
             document.getElementById('accepted').style.display='none';
             document.getElementById('log').style.display='none';
             document.getElementById('students').style.display='block';
+            document.getElementById('abs').style.display='none';
 			document.getElementById('progress').style.display='none';
+        }
+        function abstract(){
+            document.getElementById('pending').style.display='none';
+            document.getElementById('accepted').style.display='none';
+            document.getElementById('log').style.display='none';
+            document.getElementById('students').style.display='none';
+            document.getElementById('abs').style.display='block';
+			document.getElementById('progress').style.display='none';
+
         }
         function approve(sno,reg,name,email,course,guide){
             if (confirm('Are you sure you want to approve?')) {
